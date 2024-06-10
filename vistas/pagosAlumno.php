@@ -37,7 +37,7 @@
             if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx' || $_SESSION['rol'] == 'Conta') {
                 $deleteAl = '
                     <a id="deleteAl" style="top: 5.5rem; left: 30rem; width: 10rem; height: 3rem; display: flex; align-items:center; justify-content: center" class="btn btn-outline-danger border border-danger btn-floating" href="index.php?seccion=listaAlumnos&accion=eliminar&id=' . $alumno[0][0] . '"><span class="fa fa-trash"></span> Borrar Alumno</a>
-                    <a id="deleteAl" style="top: 5.5rem; right: 30rem; width: 10rem; height: 3rem; display: flex; align-items:center; justify-content: center" class="btn btn-outline-primary border border-primary btn-floating" href="index.php?seccion=listaAlumnos&accion=editarAlumno&id=' . $alumno[0][0] . '"><span class="fa fa-edit"></span> Editar Alumno</a>
+                    <a id="deleteAl" style="top: 5.5rem; right: 30rem; width: 10rem; height: 3rem; display: flex; align-items:center; justify-content: center" class="btn btn-outline-primary border border-primary btn-floating" href="index.php?seccion=editarAlumno&id=' . $alumno[0][0] . '"><span class="fa fa-edit"></span> Editar Alumno</a>
                 ';   
             } else {
                 $deleteAl = '';
