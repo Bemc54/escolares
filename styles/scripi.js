@@ -102,9 +102,8 @@ function crearUsuarios() {
                     </div>
                     <div class="form-floating mb-1">
                         <select class="form-select" aria-label="Default select example" name="rol" required>
-                            <option value="Conta">Conta</option>
-                            <option value="Admin">Admin</option>
                             <option value="Administrativo">Administrativo</option>
+                            <option value="Conta">Conta</option>
                             <option value="sx">sx</option>
                         </select>
                         <label for="floatingInput">Rol</label>

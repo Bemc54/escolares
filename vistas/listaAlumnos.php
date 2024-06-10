@@ -27,7 +27,7 @@
         $btnAgregar = '';
         if (isset($_SESSION['rol'])) {
             $lista = ControladorAlumnos::consultaAlumnos();
-            if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'Admin' || $_SESSION['rol'] == 'Administrativo' || $_SESSION['rol'] == 'sx') {
+            if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'Conta' || $_SESSION['rol'] == 'sx') {
                 $btnAgregar = '
                     <button id="add" style="bottom: 3rem; right: 3rem;" class="btn btn-outline-light border border-light" onclick="registrarAlumno()"><span class="fa fa-user-graduate"></span></button>
                 ';   
@@ -62,7 +62,7 @@
             ';
         }
         foreach ($lista as $row => $item) {
-            if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'Admin' || $_SESSION['rol'] == 'Administrativo' || $_SESSION['rol'] == 'sx') {
+            if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'Conta' || $_SESSION['rol'] == 'sx') {
                 $acciones = '
                     <td style="justify-content:center; display: flex;">
                         <a class="btn btn-icon btn-info" href="index.php?seccion=editarAlumno&id=' . $item[0] . '"><i class="fa fa-edit"></i></a>

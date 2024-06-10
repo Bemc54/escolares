@@ -28,14 +28,11 @@
       $listas = $listaAlumnos . $listaPagos . $listaIngresos . $listaAdeudos;
       $MenuDesp = $cargarAlumnos . $corteDia . $corteDia2 . $corteRango;
     } elseif ($_SESSION['rol'] == 'Conta') {
-      $listas = $listaAlumnos . $listaIngresos . $listaAdeudos;
-      $MenuDesp = $corteDia;
-    } elseif ($_SESSION['rol'] == 'Admin') {
       $listas = $listaAlumnos . $listaPagos . $listaIngresos . $listaAdeudos;
       $MenuDesp = $cargarAlumnos . $corteDia . $corteDia2 . $corteRango;
     } elseif ($_SESSION['rol'] == 'Administrativo') {
-      $listas = $listaAlumnos . $listaPagos . $listaIngresos . $listaAdeudos;
-      $MenuDesp = $cargarAlumnos . $corteDia . $corteRango;
+      $listas = $listaAlumnos . $listaIngresos . $listaAdeudos;
+      $MenuDesp = $corteDia;
     }
 
     $menu = '
