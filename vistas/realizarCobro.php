@@ -12,7 +12,7 @@
                 });
             </script>
         ';
-    } elseif (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx' || $_SESSION['rol'] == 'Admin') {
+    } elseif (isset($_SESSION['rol'])) {
         $idal = $_GET['idal'];
         $idpa = $_GET['idpa'];
         $con = $_GET['con'];
@@ -45,7 +45,6 @@
                     </div>
                     <div class="form-floating mb-1">
                         <select class="form-select" aria-label="Default select example" name="metodo" required>
-                            <option>Seleccione el Metodo de Pago</option>
                             <option value="Efectivo">Efectivo</option>
                             <option value="Transferencia">Transferencia</option>
                             <option value="Cheque">Cheque</option>

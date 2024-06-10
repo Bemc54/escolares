@@ -6,25 +6,36 @@
   $alumno -> guardarAlumno();
   $Pago = new ControladorPagos;
   $Pago -> guardarPago();
+  $usuario = new ControladorUsuarios;
+  $usuario -> guardarUsuario();
   session_start();
   if (!isset($_SESSION['rol'])) {
     $menu = '';
-  } elseif (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx' || $_SESSION['rol'] == 'Editor') {
-    $registrarAlumnos = '';
-    $listaAlumnos = '';
+  } elseif (isset($_SESSION['rol'])) {
+    $MenuDesp = '';
+    $listas = '';
+    $listaAlumnos = '<a class="nav-link" aria-current="page" href="index.php?seccion=listaAlumnos"><i class="fa-solid fa-user-graduate"></i> Lista Alumnos</a>';
+    $listaPagos = '<a class="nav-link" aria-current="page" href="index.php?seccion=listaPagos"><i class="fa-solid fa-dollar-sign"></i> Lista Pagos</a>';
+    $listaIngresos = '<a class="nav-link" aria-current="page" href="index.php?seccion=listaIngresos"><i class="fa-solid fa-hand-holding-dollar"></i> Lista Ingresos</a>';
+    $listaAdeudos = '<buttton class="nav-link" onclick="consultarAdeudo()"><i class="fa-solid fa-sack-dollar"></i> Lista Adeudos</button>';
+    $craerUsuarios = '';
+    $cargarAlumnos = '<li><button class="dropdown-item" onclick="cargarAlumnos()"><i class="fa-solid fa-users-between-lines"></i> Carga Masiva de Alumnos</button></li>';
+    $corteDia = '<li><a class="dropdown-item" href="index.php?seccion=corteDia"><span class="fa fa-cash-register"></span> Corte de Caja del Día</a></li>';
+    $corteDia2 = '<li><button class="dropdown-item" onclick="corteDia()"><span class="fa fa-calendar-day"></span> Corte de Caja de días anteriores</button></li>';
+    $corteRango = '<li><button class="dropdown-item" onclick="corteRango()"><span class="fa fa-calendar-days"></span> Corte de Caja de un rango de fechas</button></li>';
     if ($_SESSION['rol'] == 'sx') {
-      $listaAlumnos = '
-        <a class="nav-link" aria-current="page" href="index.php?seccion=listaAlumnos"><i class="fa-solid fa-user-graduate"></i> Lista Alumnos</a>
-        <a class="nav-link" aria-current="page" href="index.php?seccion=listaPagos"><i class="fa-solid fa-dollar-sign"></i> Lista Pagos</a>
-        <a class="nav-link" aria-current="page" href="index.php?seccion=listaIngresos"><i class="fa-solid fa-hand-holding-dollar"></i> Lista Ingresos</a>
-      ';
-      $registrarAlumnos = '
-        <li><button class="dropdown-item" onclick="cargarAlumnos()"><i class="fa-solid fa-users-between-lines"></i> Carga Masiva de Alumnos</button></li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-      ';
-    } elseif ($_SESSION['rol'] == 'Editor') {
+      $craerUsuarios = '<button id="add" style="top:3.5%; bottom: 96.5%; width: 22rem; transform: translate(-50%, -50%); left: 50%;" class="btn btn-outline-dark border border-dark" onclick="crearUsuarios()"><span class="fa fa-user-plus"></span> Crear Usuario Nuevo</button>';
+      $listas = $listaAlumnos . $listaPagos . $listaIngresos . $listaAdeudos;
+      $MenuDesp = $cargarAlumnos . $corteDia . $corteDia2 . $corteRango;
+    } elseif ($_SESSION['rol'] == 'Conta') {
+      $listas = $listaAlumnos . $listaIngresos . $listaAdeudos;
+      $MenuDesp = $corteDia;
+    } elseif ($_SESSION['rol'] == 'Admin') {
+      $listas = $listaAlumnos . $listaPagos . $listaIngresos . $listaAdeudos;
+      $MenuDesp = $cargarAlumnos . $corteDia . $corteDia2 . $corteRango;
+    } elseif ($_SESSION['rol'] == 'Administrativo') {
+      $listas = $listaAlumnos . $listaPagos . $listaIngresos . $listaAdeudos;
+      $MenuDesp = $cargarAlumnos . $corteDia . $corteRango;
     }
 
     $menu = '
@@ -32,6 +43,7 @@
       <br>
       <br>
       <nav class="navbar fixed-top">
+        '.$craerUsuarios.'
         <div class="container-fluid">
           <a style="width: 2%"><img id="logo" src="./images/logo.jpg" alt=""></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -45,7 +57,7 @@
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" id="menu">
                 <li class="nav-item">
-                  '.$listaAlumnos.'
+                  '.$listas.'
                 </li>
                 <li style="color: white">
                   <hr>
@@ -55,7 +67,10 @@
                     '.$_SESSION['nombre'].'
                   </a>
                   <ul class="dropdown-menu">
-                    '.$registrarAlumnos.'
+                    '.$MenuDesp.'
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="index.php?seccion=logout">Salir <i class="fa-solid fa-right-from-bracket"></i></a></li>
                   </ul>
                 </li>

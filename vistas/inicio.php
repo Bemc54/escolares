@@ -1,3 +1,6 @@
+<h1 style="color:white; height: 80px; background: #00000020; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; display: flex; align-items: center; justify-content: center">
+  SISTEMA UNIVERSITARIO MARIE CURIE S.C.
+</h1>
 <form id="loginForm" class="card col-4 formulario" method="post">
   <h1 class="card-header text-center" style="color:white; height: 75px; background: #00000020;"><b>Iniciar Sesion</b></h1>
   <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; background: #00000020;">

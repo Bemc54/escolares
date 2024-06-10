@@ -30,6 +30,46 @@
             $rs -> close();
         }
 
+        static function selectIngresosDia($tabla, $dia) {
+            $sql = "
+                SELECT
+                    ingresos.id AS ingreso_id,
+                    alumnos.nombre AS alumno_nombre,
+                    alumnos.telefono AS alumno_telefono,
+                    alumnos.correo AS alumno_correo,
+                    alumnos.grado_estudio AS alumno_grado_estudio,
+                    alumnos.carrera AS alumno_carrera,
+                    pagos.concepto AS pago_concepto,
+                    pagos.monto AS pago_monto
+                FROM $tabla
+                INNER JOIN alumnos ON ingresos.id_al = alumnos.id
+                INNER JOIN pagos ON ingresos.id_pa = pagos.id
+                WHERE ingresos.fecha_pago = '$dia';
+            ";
+            $rs = Conexion::conectar()->query($sql);
+            return $rs;
+        }
+
+        static function selectIngresosRango($tabla, $desde, $hasta) {
+            $sql = "
+                SELECT
+                    ingresos.id AS ingreso_id,
+                    alumnos.nombre AS alumno_nombre,
+                    alumnos.telefono AS alumno_telefono,
+                    alumnos.correo AS alumno_correo,
+                    alumnos.grado_estudio AS alumno_grado_estudio,
+                    alumnos.carrera AS alumno_carrera,
+                    pagos.concepto AS pago_concepto,
+                    pagos.monto AS pago_monto
+                FROM $tabla
+                INNER JOIN alumnos ON ingresos.id_al = alumnos.id
+                INNER JOIN pagos ON ingresos.id_pa = pagos.id
+                WHERE STR_TO_DATE(ingresos.fecha_pago, '%d/%m/%Y') BETWEEN STR_TO_DATE('$desde', '%d/%m/%Y') AND STR_TO_DATE('$hasta', '%d/%m/%Y');
+            ";
+            $rs = Conexion::conectar()->query($sql);
+            return $rs;
+        }
+
         static function selectAllIngresosID($tabla, $id){
             $sql = "
                 select 

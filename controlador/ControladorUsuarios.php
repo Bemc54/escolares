@@ -9,14 +9,14 @@
         }
 
         static function guardarUsuario(){
-            if(isset($_POST["guardar"])){
+            if(isset($_POST["usuario"])){
                 $tabla = 'usuarios';
                 $datos = array(
-                    "nombre" => $_POST["nombre"],
-                    "nombre_usu" => $_POST["nombre_usu"],
+                    "nom_usu" => $_POST["nom_usu"],
+                    "tel" => $_POST["tel"],
                     "mail" => $_POST["mail"],
-                    "contraseña" => $_POST["contraseña"],
-                    "tipo" => $_POST["tipo"]
+                    "pass" => $_POST["pass"],
+                    "rol" => $_POST["rol"]
                 );
         
                 $respuesta = ModeloUsuarios::insertarUsuarios($tabla, $datos);
@@ -25,7 +25,7 @@
                     echo '
                         <script type="text/javascript">
                             Swal.fire({
-                                icon: "error",
+                                icon: "success",
                                 title: "Usuario Creado con Exito",
                                 text: "Ya puede Iniciar Sesión con este Usuario",
                                 showConfirmButton: true,

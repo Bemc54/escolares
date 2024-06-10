@@ -1,11 +1,11 @@
 <html>
     <head>
-        <link rel="icon" type="image/x-icon" href="./images/Imagen1.png">
-        <title>Proyect SX</title>
+        <link rel="icon" type="image/x-icon" href="./images/logo.jpg">
+        <title>SISTEMA UNIVERSITARIO MARIE CURIE S.C.</title>
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <!-- Personal Styles -->
-        <link rel="stylesheet" href="./styles/style1.css">
+        <link rel="stylesheet" href="./styles/style.css">
         <!-- Sweet Alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Iconos -->
@@ -45,6 +45,6 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- Personal Scripts -->
-        <script type="text/javascript" charset="utf8" src="./styles/script.js"></script>
+        <script type="text/javascript" charset="utf8" src="./styles/scripi.js"></script>
     </body>
 </html>

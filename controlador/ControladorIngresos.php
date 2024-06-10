@@ -109,6 +109,20 @@
             }
         }
 
+        static function consultaIngresosDia($dia){
+            $tabla = 'ingresos';
+            $Ingresos = ModeloIngresos::selectIngresosDia($tabla, $dia);
+            $arreglo = $Ingresos -> fetch_all();
+            return $arreglo;
+        }
+
+        static function consultaIngresosRango($desde, $hasta){
+            $tabla = 'ingresos';
+            $Ingresos = ModeloIngresos::selectIngresosRango($tabla, $desde, $hasta);
+            $arreglo = $Ingresos -> fetch_all();
+            return $arreglo;
+        }
+
         static function consultaIngresoPorAlumno(){
             if(isset($_GET["id"])){
                 $tabla = 'ingresos';

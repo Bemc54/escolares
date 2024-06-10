@@ -1,6 +1,6 @@
 <div class="col-10 list">
     <?php
-    if (!isset($_SESSION['rol'])){
+    if (!isset($_SESSION['rol'])) {
         echo '
             <script type="text/javascript">
                 Swal.fire({
@@ -13,29 +13,25 @@
                 });
             </script>
         ';
-    } else{
-        $eliminar = new ControladorPagos;
-        $eliminar -> eliminarPago();
+    } else {
         $heads = '
-            <th>Concepto</th>
-            <th>Monto</th>
-            <th>Tipo de Alumno Aceptado</th>
-            <th>Fun</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Grado de Estudio</th>
+            <th>Carrera (Solo Universitarios)</th>
+            <th>Adeudos</th>
         ';
-        $btnAgregar = '';
-        if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx') {
-            if ($_SESSION['rol'] == 'sx') {
-                $lista = ControladorPagos::consultaPagos();
-                $btnAgregar = '
-                    <button id="add" style="bottom: 3rem; right: 3rem;" class="btn btn-success border border-success" onclick="crearPago()"><span class="fa fa-dollar-sign"></span></button>
-                ';
-            }
+        $inicio = date('d/m/Y', strtotime($_POST['inicio']));
+        $fin = date('d/m/Y', strtotime($_POST['fin']));
+        if (isset($_SESSION['rol'])) {
+            $lista = ControladorAlumnos::consultaAlumnosAdeudos($inicio, $fin);
             echo '
                 <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: -1%">
-                    <button class="btn btn-icon btn-outline-warning" style="background: yellow" onclick="InfoPagos()"><i class="fa-solid fa-question fa-flip"></i></button>
+                    <button class="btn btn-icon btn-outline-warning" style="background: yellow" onclick="invitadosInformacion()"><i class="fa-solid fa-question fa-flip"></i></button>
+                    <a class="btn btn-danger" href="index.php?seccion=reporteAdeudos&inicio=' . $inicio . '&fin=' . $fin . '"><span class="fa fa-file-pdf"></span> Generar PDF</a>
                 </div>
-                '.$btnAgregar.'
-                <h4 class="text-center"><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> Lista de Pagos</span></h4>
+                <h4 class="text-center"><span class="badge bg-primary"><i class="fa-solid fa-sack-dollar"></i> Lista de Adeudos</span></h4>
                 <table class="table table-secondary table-bordered table-striped table-hover" id="empleados">
                     <thead>
                         <tr class="table-dark">
@@ -58,17 +54,14 @@
                 </script>
             ';
         }
-        foreach ($lista as $row => $item) {
-            $acciones = '
-                <td style="justify-content:space-around; display: flex;">
-                    <a class="btn btn-icon btn-info" href="index.php?seccion=editarPago&id=' . $item[0] . '"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-icon btn-danger" href="index.php?seccion=listaPagos&accion=eliminar&id=' . $item[0] . '"><i class="fa fa-trash"></i></a>
-                </td>';
+        foreach ($lista as $item) {
             $contenido = '
-                    <td>' . $item[1] . '</td>
-                    <td><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> '.$item[2].'</span></td>
+                    <td><a href="index.php?seccion=pagosAlumno&id='.$item[0].'">' . $item[1] . '</td>
+                    <td>' . $item[2] . '</td>
                     <td>' . $item[3] . '</td>
-                    ' . $acciones . '
+                    <td>' . $item[4] . '</td>
+                    <td>' . $item[5] . '</td>
+                    <td>' . $item[6] . '</td>
             ';
             echo '
                 <tr>
@@ -76,8 +69,10 @@
                 </tr>
             ';
         }
+        echo '
+            </tbody>
+            </table>
+        ';
     }
-?>
-        </tbody>
-    </table>
+    ?>
 </div>

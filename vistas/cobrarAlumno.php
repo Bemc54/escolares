@@ -16,24 +16,25 @@
     } else{
         $id = $_GET['idal'];
         $gradoAl = $_GET['grade'];
+        $carrera = $_GET['carr'];
+        if ($carrera === 'Proteccion Civil') {
+            $mensaje = 'Valor cambiado por cursar ' . $carrera;
+        } else {
+            $mensaje = '';
+        }
         $eliminar = new ControladorPagos;
         $eliminar -> eliminarPago();
         $heads = '
             <th>Concepto</th>
-            <th>Monto</th>
+            <th>Monto <br> <span class="badge bg-danger">'.$mensaje.'</span></th>
             <th>Tipo de Alumno Aceptado</th>
             <th>Fun</th>
         ';
         $btnAgregar = '';
-        if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx') {
-            if ($_SESSION['rol'] == 'sx') {
-                $lista = ControladorPagos::consultaPagos();
-            }
+        if (isset($_SESSION['rol'])) {
+            $lista = ControladorPagos::consultaPagos();
             echo '
-                <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: -1%">
-                    <button class="btn btn-icon btn-outline-warning" style="background: yellow" onclick="invitadosInformacion()"><i class="fa-solid fa-question fa-flip"></i></button>
-                </div>
-                <h4 class="text-center"><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> Seleccciona el Cobro a realizar</span></h4>
+                <h4 class="text-center"><span class="badge bg-success">Seleccciona el Cobro a realizar</span></h4>
                 <table class="table table-secondary table-bordered table-striped table-hover" id="empleados">
                     <thead>
                         <tr class="table-dark">
@@ -62,6 +63,19 @@
                 $hide = '';
             } else {
                 $hide = 'display: none;';
+            }
+            if ($carrera === 'Proteccion Civil') {
+                switch ($item[1]) {
+                    case 'Inscripcion':
+                        $item[2] = 2100;
+                        break;
+                    case 'Mensualidad':
+                        $item[2] = 2500;
+                        break;
+                    case 'Reinscripcion':
+                        $item[2] = 1900;
+                        break;
+                }
             }
             $acciones = '
                 <td style="justify-content:center; display: flex;">

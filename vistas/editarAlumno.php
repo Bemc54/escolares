@@ -42,9 +42,11 @@
                     <div class="form-floating mb-2">
                         <select class="form-select" aria-label="Default select example" name="grado_estudio" required>
                             <option selected value="'.$item[4].'">Valor Actual: '.$item[4].'</option>
-                            <option value="Preparatoria">Preparatoria</option>
-                            <option value="Universidad">Universidad</option>
-                            <option value="Post-Grado">Post-Grado</option>
+                            <option value="Bachillerato">Bachillerato</option>
+                            <option value="Carrera Semi-Escolarizada">Carrera Semi-Escolarizada</option>
+                            <option value="Carrera Escolarizada">Carrera Escolarizada</option>
+                            <option value="Maestria">Maestria</option>
+                            <option value="Examen Unico">Examen Unico</option>
                         </select>
                         <label for="floatingInput">Nivel de Estudio</label>
                     </div>
@@ -57,6 +59,7 @@
                             <option value="Trabajo Social">Trabajo Social</option>
                             <option value="Psicopedagogia">Psicopedagogia</option>
                             <option value="Ingles">Ingles</option>
+                            <option value="Proteccion Civil">Proteccion Civil</option>
                         </select>
                         <label for="floatingInput">Carreras (Solo universidad)</label>
                     </div>

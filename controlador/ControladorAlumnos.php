@@ -7,6 +7,13 @@
             return $arreglo;
         }
 
+        static function consultaAlumnosAdeudos($inicio, $fin){
+            $tabla = 'alumnos';
+            $alumnos = ModeloAlumnos::selectAlumnosAdeudos($tabla, $inicio, $fin);
+            $arreglo = $alumnos -> fetch_all();
+            return $arreglo;
+        }
+
         static function guardarAlumno(){
             if (isset($_POST["guardar"])) {
                 $tabla = 'alumnos';

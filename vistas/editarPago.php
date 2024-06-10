@@ -40,10 +40,10 @@
                     <div class="form-floating mb-1">
                         <select class="form-select" aria-label="Default select example" name="tipo_alumno" required>
                             <option selected value="'.$item[3].'">Dato Guardado: '.$item[3].'</option>
-                            <option value="Todos">Todos</option>
-                            <option value="Preparatoria">Preparatoria</option>
-                            <option value="Universidad">Universidad</option>
-                            <option value="Post-Grado">Post-Grado</option>
+                            <option value="Bachillerato">Bachillerato</option>
+                            <option value="Carrera Semi-Escolarizada">Carrera Semi-Escolarizada</option>
+                            <option value="Carrera Escolarizada">Carrera Escolarizada</option>
+                            <option value="Maestria">Maestria</option>
                         </select>
                         <label for="floatingInput">Tipo de Alumno que lo debe Pagar</label>
                     </div>

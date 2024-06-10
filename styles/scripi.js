@@ -33,47 +33,44 @@ $(document).ready(function () {
     $('#empleados').DataTable();
 });
 //   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   ////   Infomracion   //
-function mostrarInformacion() {
+function infoPagosAl() {
     Swal.fire({
       title: 'Iconos',
       html: `
             <b style="display: flex; flex-direction: column; align-items: center;">
-                <div class="btn btn-icon btn-info"><i class="fa fa-edit"></i></div> Editar Infromación del Anuncio
-                <div class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></div> Eliminar Anuncio
-                <div class="btn btn-icon btn-secondary"><i class="fa-solid fa-pause"></i></div> Pausar Anuncio
-                <div class="btn btn-icon btn-primary"><i class="fa fa-play"></i></div> Reactivar Anuncio
-                <button class="btn btn-icon btn-success" onclick="agregarAdd()"><span class="fa fa-plus"></span></button> Agregar un nuevo anuncio
+                <div class="btn btn-info"><i class="fa fa-edit"></i> Editar Alumno</div> Editar Infromación del Alumno
+                <div class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar Alumno</div> Eliminar Alumno
+                <div class="btn btn-success"><i class="fa fa-cash-register"></i> Realizar Cobro</div> Cobrar al Alumno
+                <div class="btn btn-icon btn-success"><i class="fa fa-receipt"></i></div> Crear Ticket de Pago
+                <div class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></div> Eliminar Pago
             </b>
             `,
       icon: 'question',
       confirmButtonText: 'Cerrar',
     });
 }
-function mostrarInformacion1() {
+function InfoAlumnos() {
     Swal.fire({
       title: 'Información',
       html: `
             <b style="display: flex; flex-direction: column; align-items: center;">
-                En esta sección se puede modificar el nombre de un empleado que se haya ingresado mal a la base de datos, para así evitar que los tomates no se acumulen de manera correcta con el siguiente botón:
-                <div class="btn btn-icon btn-info"><i class="fa-solid fa-pen-to-square"></i></div>
-                Eliminar el registro de la base de datos de un empleado que ya no será considerado para acumular tomates con el siguiente botón:
-                <div class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></div>
-                Eliminar todos los registros de los tomates para empezar con una nueva acumulación del año en curso, con el siguiente botón:
-                <div class="btn btn-icon btn-warning"><i class="fa fa-trash-can"></i></div>
+                <div class="btn btn-icon btn-info"><i class="fa fa-edit"></i></div> Editar Infromación del Alumno
+                <div class="btn btn-icon btn-light"><i class="fa fa-user-graduate"></i></div> Crear nuevo Alumno <br><br>
+                Para poder realizar un corbo sera necesario pulsar el nombre del alumno y entrar a la sección de pagos del alumno
             </b>
             `,
       icon: 'question',
       confirmButtonText: 'Cerrar',
     });
 }
-function invitadosInformacion() {
+function InfoPagos() {
     Swal.fire({
       title: 'Iconos',
       html: `
             <b style="display: flex; flex-direction: column; align-items: center;">
-                <div class="btn btn-icon btn-info"><i class="fa fa-edit"></i></div> Editar Infromación del Empleado
-                <div class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></div> Eliminar Empleado de la base de datos
-                <div style="background-color: #F8D7DA; padding: 4px; border-radius: 4px;">Empleado dado de Baja, además se añadirá la fecha de Baja en la columna correspondiente</div>
+                <div class="btn btn-icon btn-info"><i class="fa fa-edit"></i></div> Editar Infromación del Pago
+                <div class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></div> Eliminar Pago
+                <div class="btn btn-icon btn-success"><i class="fa fa-dollar-sign"></i></div> Crear nuevo Pago
             </b>
             `,
       icon: 'question',
@@ -81,13 +78,52 @@ function invitadosInformacion() {
     });
 }
 //   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   ////   Formularios   //
+function crearUsuarios() {
+    Swal.fire({
+        title: "Crear nuevo usuario",
+        html: `
+            <form class="p-3 card bg-info" action="" method="post" enctype="multipart/form-data">
+                <div style="margin-bottom:2%">
+                    <div class="form-floating mb-1">
+                        <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="nom_usu" required placeholder="">
+                        <label for="floatingInput">Nombre</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input autocomplete="off" class="form-control" type="number" id="floatingInput" name="tel" required placeholder="">
+                        <label for="floatingInput">Telefono</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input autocomplete="off" class="form-control" type="mail" id="floatingInput" name="mail" required placeholder="">
+                        <label for="floatingInput">Correo</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input autocomplete="off" class="form-control" type="password" id="floatingInput" name="pass" required placeholder="">
+                        <label for="floatingInput">Contraseña</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <select class="form-select" aria-label="Default select example" name="rol" required>
+                            <option value="Conta">Conta</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Administrativo">Administrativo</option>
+                            <option value="sx">sx</option>
+                        </select>
+                        <label for="floatingInput">Rol</label>
+                    </div>
+                </div>
+                <button type="submit" name="usuario" class="btn btn-success"><i class="fa-solid fa-cloud-arrow-up"></i> Guardar Anuncio</button>
+            </form>
+        `,
+        showCloseButton: true,
+        showConfirmButton: false,
+        width: 600,
+    });
+}
 function registrarAlumno() {
     Swal.fire({
         title: "Registrar Alumno",
         html: `
             <form class="p-3 card bg-info" action="" method="post" enctype="multipart/form-data">
                 <div style="margin-bottom:2%">
-                    <input type="hidden" value="1" name="pause">
                     <div class="form-floating mb-1">
                         <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="nombre" required placeholder="">
                         <label for="floatingInput">Nombre</label>
@@ -106,6 +142,7 @@ function registrarAlumno() {
                             <option value="Carrera Semi-Escolarizada">Carrera Semi-Escolarizada</option>
                             <option value="Carrera Escolarizada">Carrera Escolarizada</option>
                             <option value="Maestria">Maestria</option>
+                            <option value="Examen Unico">Examen Unico</option>
                         </select>
                         <label for="floatingInput">Nivel de Estudio</label>
                     </div>
@@ -139,7 +176,6 @@ function crearPago() {
                 <div style="margin-bottom:2%">
                     <div class="form-floating mb-1">
                         <select class="form-select" aria-label="Default select example" name="concepto" required>
-                            <option value="Examen Unico">Examen Unico</option>
                             <option value="Mensualidad">Mensualidad</option>
                             <option value="Inscripcion">Inscripcion</option>
                             <option value="Reinscripcion">Reinscripcion</option>
@@ -156,6 +192,7 @@ function crearPago() {
                             <option value="Carrera Semi-Escolarizada">Carrera Semi-Escolarizada</option>
                             <option value="Carrera Escolarizada">Carrera Escolarizada</option>
                             <option value="Maestria">Maestria</option>
+                            <option value="Examen Unico">Examen Unico</option>
                         </select>
                         <label for="floatingInput">Tipo de Alumno que lo debe Pagar</label>
                     </div>
@@ -207,6 +244,60 @@ function exportarTomates() {
         showCloseButton: true,
         showConfirmButton: false,
         width: 500,
+    });
+}
+function corteDia() {
+    Swal.fire({
+        title: "Seleccione el dia que desea adquirir el corte",
+        html: `
+            <form class="p-3 card bg-secondary-subtle" action="index.php?seccion=corteDia" method="post" enctype="multipart/form-data">
+                <div calss="form-floating mb-1" style="margin-bottom:2%">
+                    <input type="date" id="dia" name="dia" class="form-control">
+                </div>
+                <button type="submit" name="imprimir" class="btn btn-danger"><i class="fa-solid fa-cash-register"></i> Crear Corte</button>
+            </form>
+        `,
+        showCloseButton: true,
+        showConfirmButton: false,
+        width: 400,
+    });
+}
+function consultarAdeudo() {
+    Swal.fire({
+        title: "Seleccione rango de fechas para consultar los adeudos",
+        html: `
+            <form class="p-3 card bg-secondary-subtle" action="index.php?seccion=listaAdeudos" method="post" enctype="multipart/form-data">
+                <div calss="form-floating mb-1" style="margin-bottom:2%">
+                    <input type="date" id="inicio" name="inicio" class="form-control">
+                </div>
+                <div calss="form-floating mb-1" style="margin-bottom:2%">
+                    <input type="date" id="fin" name="fin" class="form-control">
+                </div>
+                <button type="submit" name="imprimir" class="btn btn-danger"><i class="fa-solid fa-cash-register"></i> Consultar</button>
+            </form>
+        `,
+        showCloseButton: true,
+        showConfirmButton: false,
+        width: 400,
+    });
+}
+function corteRango() {
+    Swal.fire({
+        title: "Seleccione rango de fechas para corte de caja",
+        html: `
+            <form class="p-3 card bg-secondary-subtle" action="index.php?seccion=corteRango" method="post" enctype="multipart/form-data">
+                <div calss="form-floating mb-1" style="margin-bottom:2%">
+                    <input type="date" id="inicio" name="inicio" class="form-control">
+                </div>
+                <div calss="form-floating mb-1" style="margin-bottom:2%">
+                    <input type="date" id="fin" name="fin" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-cash-register"></i> Consultar</button>
+            </form>
+        `,
+        showCloseButton: true,
+        showConfirmButton: false,
+        width: 400,
     });
 }
 function borrarTomates() {

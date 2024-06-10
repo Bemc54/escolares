@@ -3,30 +3,19 @@ require 'vendor/autoload.php';
 use Mpdf\Mpdf;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
-// Obtener el ID del ingreso
-$idIngreso = $_GET['id'];
-
+$inicio = date('d/m/Y', strtotime($_POST['inicio'])); 
+$fin = date('d/m/Y', strtotime($_POST['fin']));
+$fechas = $inicio . ' - ' . $fin;
 // Consultar los datos del ingreso
-$ingreso = ControladorIngresos::consultaTodoIngresoID($idIngreso);
+$ingreso = ControladorIngresos::consultaIngresosRango($inicio, $fin);
 
 if ($ingreso) {
-    $idPago = $ingreso[0][2]; // Ajusta los índices según tu estructura de datos
-    $nombreAlumno = $ingreso[0][10];
-    $concepto = $ingreso[0][3];
-    $monto = $ingreso[0][4];
-    $fechaPago = $ingreso[0][5];
-    $cobrador = $ingreso[0][6];
-    $metodo = $ingreso[0][7];
-    $comentario = $ingreso[0][8];
-    $idAlumno = $ingreso[0][1];
-    $grado = $ingreso[0][11];
-    $idPageIng= $idPago.$idIngreso;
-
     $mpdf = new Mpdf();
 
     // Generar código de barras
     $generator = new BarcodeGeneratorPNG();
-    $barcode = base64_encode($generator->getBarcode($idPageIng, $generator::TYPE_CODE_128));
+    $barcode = base64_encode($generator->getBarcode($fechas, $generator::TYPE_CODE_128));
+    $totalMonto = 0;
 
     $html = '
         <style>
@@ -34,7 +23,7 @@ if ($ingreso) {
                 font-family: Arial, sans-serif;
             }
             .ticket-container {
-                width: 70%;
+                width: 90%;
                 max-width: 600px;
                 margin: 0 auto;
                 border: 1px solid #ccc;
@@ -60,6 +49,7 @@ if ($ingreso) {
                 border: 1px solid #ccc;
                 padding: 8px;
                 text-align: left;
+                font-size: 14px;
             }
             .ticket-details th {
                 background-color: #f2f2f2;
@@ -77,63 +67,59 @@ if ($ingreso) {
 
         <div class="ticket-container">
             <div class="ticket-header">
-                <h1>Ticket de Pago</h1>
+                <h1>Corte del rango ' . $fechas . '</h1>
             </div>
             <div style="text-align: center; margin-bottom: 20px">
                 <img style="width: 25%;" src="./images/logo.jpg">
             </div>
             <table class="ticket-details">
-                <tr>
-                    <th>ID Pago</th>
-                    <td>' . $idPago . '</td>
-                </tr>
-                <tr>
-                    <th>Nombre del Alumno</th>
-                    <td>' . $nombreAlumno . '</td>
-                </tr>
-                <tr>
-                    <th>Grado</th>
-                    <td>' . $grado . '</td>
-                </tr>
-                <tr>
-                    <th>Concepto</th>
-                    <td>' . $concepto . '</td>
-                </tr>
-                <tr>
-                    <th>Monto</th>
-                    <td>$ ' . $monto . '</td>
-                </tr>
-                <tr>
-                    <th>Fecha de Pago</th>
-                    <td>' . $fechaPago . '</td>
-                </tr>
-                <tr>
-                    <th>Cobrador</th>
-                    <td>' . $cobrador . '</td>
-                </tr>
-                <tr>
-                    <th>Método de Pago</th>
-                    <td>' . $metodo . '</td>
-                </tr>
-                <tr>
-                    <th>Comentarios</th>
-                    <td>' . $comentario . '</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Alumno</th>
+                        <th>Concepto</th>
+                        <th>Monto</th>
+                        <th>Grado de Estudio</th>
+                        <th>Carrera</th>
+                    </tr>
+                </thead>
+                <tbody>
+    ';
+
+    foreach ($ingreso as $row => $item) {
+        $nombre = $item[1];
+        $concepto = $item[6];
+        $monto = number_format($item[7], 2);
+        $grado = $item[4];
+        $carrera = $item[5];
+        $html .= '
+            <tr>
+                <td>' . $nombre . '</td>
+                <td>' . $concepto . '</td>
+                <td>$' . $monto . '</td>
+                <td>' . $grado . '</td>
+                <td>' . $carrera . '</td>
+            </tr>
+        ';
+        $totalMonto += $item[7];
+    }
+
+    $html .= '
+                </tbody>
             </table>
+            <p style="text-align: center;">Total: <b>$' . number_format($totalMonto, 2) . '</b></p>
             <div class="ticket-footer">
                 <p>___________________________</p>
                 <p>Firma</p>
             </div>
             <div class="barcode">
-                <img src="data:image/png;base64,' . $barcode . '" alt="Código de Barras">
-            </div>
-            <div class="ticket-footer">
-                <p>Gracias por su pago</p>
+                <img src="data:image/png;base64,' . $barcode . '">
             </div>
         </div>
     ';
     $mpdf->WriteHTML($html);
-    $nameFile = 'ticket_' . $nombreAlumno . '.pdf';
+    $inicio = date('d_m_Y', strtotime($_POST['inicio']));
+    $fin = date('d_m_Y', strtotime($_POST['fin']));
+    $nameFile = 'corte_de_' . $inicio . '_a_' . $fin . '.pdf';
     $pdfPath = './'.$nameFile;
 
     $mpdf->Output($pdfPath, 'F');
@@ -143,14 +129,24 @@ if ($ingreso) {
             window.location.href = "download.php?file=' .urlencode($nameFile). '";
             Swal.fire({
                 icon: "success",
-                title: "Ticket Generado",
+                title: "Corte de Caja Realizado",
                 showConfirmButton: true
             }).then(function() {
-                window.location.href = "index.php?seccion=pagosAlumno&id=' . $idAlumno . '";
+                window.location.href = "index.php?seccion=listaIngresos";
             });
         </script>
     ';
 } else {
-    echo "No se encontraron datos para el ingreso proporcionado.";
+    echo '
+        <script type="text/javascript">
+            Swal.fire({
+                icon: "warning",
+                title: "No tines datos para realizar el corte de caja",
+                showConfirmButton: true
+            }).then(function() {
+                window.location.href = "index.php?seccion=listaIngresos";
+            });
+        </script>
+    ';
 }
 ?>

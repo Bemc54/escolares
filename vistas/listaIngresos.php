@@ -29,15 +29,14 @@
             <th>Ticket</th>
         ';
         $btnAgregar = '';
-        if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx') {
-            if ($_SESSION['rol'] == 'sx') {
-                $lista = ControladorIngresos::consultaIngresos();
-            }
+        if (isset($_SESSION['rol'])) {
+            $lista = ControladorIngresos::consultaIngresos();
+            $btnCorte = '
+                <a id="add" style="width: 15rem; bottom: 3rem; right: 3rem; display: flex; align-items: center; justify-content: center" class="btn btn-success border border-success" href="index.php?seccion=corteDia"><span class="fa fa-cash-register"></span>Corte de Caja del Día</a>
+            ';
             echo '
-                <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: -1%">
-                    <button class="btn btn-icon btn-outline-warning" style="background: yellow" onclick="invitadosInformacion()"><i class="fa-solid fa-question fa-flip"></i></button>
-                </div>
-                <h4 class="text-center"><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> Lista de Pagos</span></h4>
+                '.$btnCorte.'
+                <h4 class="text-center"><span class="badge bg-success"><i class="fa-solid fa-hand-holding-dollar"></i> Lista de Ingresos</span></h4>
                 <table class="table table-secondary table-bordered table-striped table-hover" id="empleados">
                     <thead>
                         <tr class="table-dark">
