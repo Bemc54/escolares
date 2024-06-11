@@ -150,7 +150,7 @@ function registrarAlumno() {
                             <option selected value="">Seleccione</option>
                             <option value="Psicologia">Psicologia</option>
                             <option value="Derecho">Derecho</option>
-                            <option value="Ingenria Industrial">Ingenria Industrial</option>
+                            <option value="Ingenieria Industrial">Ingenieria Industrial</option>
                             <option value="Trabajo Social">Trabajo Social</option>
                             <option value="Psicopedagogia">Psicopedagogia</option>
                             <option value="Ingles">Ingles</option>

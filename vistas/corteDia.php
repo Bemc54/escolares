@@ -11,6 +11,7 @@ if (isset($_POST['imprimir'])) {
 }
 // Consultar los datos del ingreso
 $ingreso = ControladorIngresos::consultaIngresosDia($hoy);
+var_dump($ingreso);
 
 if ($ingreso) {
     $mpdf = new Mpdf();
@@ -83,17 +84,21 @@ if ($ingreso) {
                         <th>Monto</th>
                         <th>Grado de Estudio</th>
                         <th>Carrera</th>
+                        <th>Metodo</th>
+                        <th>Comentario</th>
                     </tr>
                 </thead>
                 <tbody>
     ';
 
     foreach ($ingreso as $row => $item) {
-        $nombre = $item[1];
-        $concepto = $item[6];
-        $monto = number_format($item[7], 2);
-        $grado = $item[4];
-        $carrera = $item[5];
+        $nombre = $item[6];
+        $comentario = $item[3];
+        $concepto = $item[5];
+        $monto = $item[4];
+        $grado = $item[9];
+        $carrera = $item[10];
+        $metodo = $item[1];
         $html .= '
             <tr>
                 <td>' . $nombre . '</td>
@@ -101,9 +106,11 @@ if ($ingreso) {
                 <td>$' . $monto . '</td>
                 <td>' . $grado . '</td>
                 <td>' . $carrera . '</td>
+                <td>' . $metodo . '</td>
+                <td>' . $comentario . '</td>
             </tr>
         ';
-        $totalMonto += $item[7];
+        $totalMonto += $item[4];
     }
 
     $html .= '

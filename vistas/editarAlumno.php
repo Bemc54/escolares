@@ -51,11 +51,11 @@
                         <label for="floatingInput">Nivel de Estudio</label>
                     </div>
                     <div class="form-floating mb-2">
-                        <select class="form-select" aria-label="Default select example" name="carrera" required>
+                        <select class="form-select" aria-label="Default select example" name="carrera">
                             <option selected value="'.$item[5].'">Valor Actual: '.$item[5].'</option>
                             <option value="Psicologia">Psicologia</option>
                             <option value="Derecho">Derecho</option>
-                            <option value="Ingenria Industrial">Ingenria Industrial</option>
+                            <option value="Ingenieria Industrial">Ingenieria Industrial</option>
                             <option value="Trabajo Social">Trabajo Social</option>
                             <option value="Psicopedagogia">Psicopedagogia</option>
                             <option value="Ingles">Ingles</option>

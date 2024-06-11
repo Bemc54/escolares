@@ -34,13 +34,17 @@
             $sql = "
                 SELECT
                     ingresos.id AS ingreso_id,
+                    ingresos.metodo,
+                    ingresos.cobrador,
+                    ingresos.comentario,
+                    ingresos.monto_pagado,
+                    ingresos.concep,
                     alumnos.nombre AS alumno_nombre,
                     alumnos.telefono AS alumno_telefono,
                     alumnos.correo AS alumno_correo,
                     alumnos.grado_estudio AS alumno_grado_estudio,
                     alumnos.carrera AS alumno_carrera,
-                    pagos.concepto AS pago_concepto,
-                    pagos.monto AS pago_monto
+                    pagos.concepto AS pago_concepto
                 FROM $tabla
                 INNER JOIN alumnos ON ingresos.id_al = alumnos.id
                 INNER JOIN pagos ON ingresos.id_pa = pagos.id
@@ -54,13 +58,17 @@
             $sql = "
                 SELECT
                     ingresos.id AS ingreso_id,
+                    ingresos.metodo,
+                    ingresos.cobrador,
+                    ingresos.comentario,
+                    ingresos.monto_pagado,
+                    ingresos.concep,
                     alumnos.nombre AS alumno_nombre,
                     alumnos.telefono AS alumno_telefono,
                     alumnos.correo AS alumno_correo,
                     alumnos.grado_estudio AS alumno_grado_estudio,
                     alumnos.carrera AS alumno_carrera,
-                    pagos.concepto AS pago_concepto,
-                    pagos.monto AS pago_monto
+                    pagos.concepto AS pago_concepto
                 FROM $tabla
                 INNER JOIN alumnos ON ingresos.id_al = alumnos.id
                 INNER JOIN pagos ON ingresos.id_pa = pagos.id

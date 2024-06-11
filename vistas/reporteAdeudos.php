@@ -3,8 +3,17 @@ require 'vendor/autoload.php';
 use Mpdf\Mpdf;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
-$inicio = date('d/m/Y', strtotime($_GET['inicio'])); 
-$fin = date('d/m/Y', strtotime($_GET['fin']));
+$fechaReal = \IntlDateFormatter::create(
+    \Locale::getDefault(),
+    \IntlDateFormatter::NONE,
+    \IntlDateFormatter::NONE,
+    \date_default_timezone_get(),
+    \IntlDateFormatter::GREGORIAN,
+    'dd/MM/yyyy'
+);
+$inicio = $fechaReal->format(strtotime($_GET['inicio'])); 
+$fin = $fechaReal->format(strtotime($_GET['fin']));
+var_dump($inicio, $fin);
 $fechas = $inicio . ' - ' . $fin;
 // Consultar los datos del ingreso
 $ingreso = ControladorAlumnos::consultaAlumnosAdeudos($inicio, $fin);
@@ -15,6 +24,22 @@ if ($ingreso) {
     // Generar código de barras
     $generator = new BarcodeGeneratorPNG();
     $barcode = base64_encode($generator->getBarcode($fechas, $generator::TYPE_CODE_128));
+
+    // Meses relevantes para cada grado de estudio
+    $mesesReinscripcionCarrera = ['septiembre', 'enero', 'abril'];
+    $mesesReinscripcionBachillerato = ['enero', 'abril', 'julio', 'octubre'];
+
+    // Obtener los meses de inicio y fin
+    $conseguirMes = \IntlDateFormatter::create(
+        \Locale::getDefault(),
+        \IntlDateFormatter::NONE,
+        \IntlDateFormatter::NONE,
+        \date_default_timezone_get(),
+        \IntlDateFormatter::GREGORIAN,
+        'MMMM'
+    );
+    $mesInicio = strtolower($conseguirMes->format(strtotime($inicio)));
+    $mesFin = strtolower($conseguirMes->format(strtotime($fin)));
 
     $html = '
         <style>
@@ -86,16 +111,38 @@ if ($ingreso) {
     ';
 
     foreach ($ingreso as $row => $item) {
-        $html .= '
-            <tr>
-                <td>' .$item[1]. '</td>
-                <td>' .$item[2]. '</td>
-                <td>' .$item[3]. '</td>
-                <td>' .$item[4]. '</td>
-                <td>' .$item[5]. '</td>
-                <td>' .$item[6]. '</td>
-            </tr>
-        ';
+        $grado_estudio = $item[4];
+        $ingresos_adeudados = explode(',', $item[6]);
+        $adeudos_filtrados = [];
+
+        foreach ($ingresos_adeudados as $adeudo) {
+            if ($adeudo == 'Reinscripcion') {
+                if ($grado_estudio == 'Carrera Semi-Escolarizada' || $grado_estudio == 'Carrera Escolarizada' || $grado_estudio == 'maestria') {
+                    if (in_array($mesInicio, $mesesReinscripcionCarrera) || in_array($mesFin, $mesesReinscripcionCarrera)) {
+                        $adeudos_filtrados[] = $adeudo;
+                    }
+                } elseif ($grado_estudio == 'Bachillerato') {
+                    if (in_array($mesInicio, $mesesReinscripcionBachillerato) || in_array($mesFin, $mesesReinscripcionBachillerato)) {
+                        $adeudos_filtrados[] = $adeudo;
+                    }
+                }
+            } else {
+                $adeudos_filtrados[] = $adeudo;
+            }
+        }
+
+        if (!empty($adeudos_filtrados)) {
+            $html .= '
+                <tr>
+                    <td>' .$item[1]. '</td>
+                    <td>' .$item[2]. '</td>
+                    <td>' .$item[3]. '</td>
+                    <td>' .$item[4]. '</td>
+                    <td>' .$item[5]. '</td>
+                    <td>' . implode(', ', $adeudos_filtrados) . '</td>
+                </tr>
+            ';
+        }
     }
 
     $html .= '
@@ -135,7 +182,7 @@ if ($ingreso) {
         <script type="text/javascript">
             Swal.fire({
                 icon: "warning",
-                title: "No tines datos para realizar el corte de caja",
+                title: "No tienes datos para realizar el corte de caja",
                 showConfirmButton: true
             }).then(function() {
                 window.location.href = "index.php?seccion=listaIngresos";
