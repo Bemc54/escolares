@@ -94,11 +94,11 @@
 
             foreach ($ingresos_adeudados as $adeudo) {
                 if ($adeudo == 'Reinscripcion') {
-                    if ($grado_estudio == 'Carrera Semi-Escolarizada' || $grado_estudio == 'Carrera Escolarizada' || $grado_estudio == 'maestria') {
+                    if ($grado_estudio == 'Carrera Semi-Escolarizada' || $grado_estudio == 'Carrera Escolarizada') {
                         if (in_array($mesInicio, $mesesReinscripcionCarrera) || in_array($mesFin, $mesesReinscripcionCarrera)) {
                             $adeudos_filtrados[] = $adeudo;
                         }
-                    } elseif ($grado_estudio == 'Bachillerato') {
+                    } elseif ($grado_estudio == 'Bachillerato' || $grado_estudio == 'Maestria') {
                         if (in_array($mesInicio, $mesesReinscripcionBachillerato) || in_array($mesFin, $mesesReinscripcionBachillerato)) {
                             $adeudos_filtrados[] = $adeudo;
                         }

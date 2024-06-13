@@ -1,4 +1,4 @@
-<h1 style="color:white; height: 80px; background: #00000020; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; display: flex; align-items: center; justify-content: center">
+<h1 class="titulo">
   SISTEMA UNIVERSITARIO MARIE CURIE S.C.
 </h1>
 <form id="loginForm" class="card col-4 formulario" method="post">

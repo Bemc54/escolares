@@ -20,7 +20,19 @@
 #logo{
     width: 100%;
     filter: drop-shadow(3px 5px 6px rgba(255, 255, 255));
-    
+}
+.titulo{
+    color:white; 
+    height: 80px; 
+    background: #00000020; 
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center
+}
+.formulario{
+    background: #6cabf7;
+    border: 6px solid white;
 }
 .list{
     background-color: rgba(255, 255, 255, 0.5);
@@ -61,10 +73,6 @@
 }
 .dropdown-item{
     color: white;
-}
-.formulario{
-    background: #6cabf7;
-    border: 6px solid white;
 }
 th{
     text-align: center;
