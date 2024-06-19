@@ -134,9 +134,9 @@
         }
 
         static function eliminarIngreso(){
-            if(isset($_GET["accion"]) && $_GET["accion"] == "eliminar" && isset($_GET["id"])){
+            if(isset($_GET["accion"]) && $_GET["accion"] == "suprimir" && isset($_GET["idpa"])){
                 $tabla = 'ingresos';
-                $id = $_GET["id"];
+                $id = $_GET["idpa"];
 
                 // Eliminar el registro de la base de datos
                 $respuesta = ModeloIngresos::deleteIngreso($tabla, $id);

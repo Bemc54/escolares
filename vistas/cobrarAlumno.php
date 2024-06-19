@@ -1,6 +1,5 @@
 <div class="col-10 list">
-    <?php
-
+<?php
     if (!isset($_SESSION['rol'])){
         echo '
             <script type="text/javascript">
@@ -102,5 +101,5 @@
             ';
         }
     }
-    ?>
+?>
 </div>

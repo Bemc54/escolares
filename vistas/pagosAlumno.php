@@ -18,8 +18,9 @@
         $alumno = ControladorAlumnos::consultaAlumnoID($id);
         $nombreAl = $alumno[0][1];
         $grado = $alumno[0][4];
-        $eliminar = new ControladorPagos;
-        $eliminar -> eliminarPago();
+        var_dump($nombreAl, $grado);
+        $eliminar = new ControladorIngresos;
+        $eliminar -> eliminarIngreso();
         $heads = '
             <th>ID Pago</th>
             <th>Concepto</th>
@@ -34,7 +35,7 @@
             $btnAgregar = '
                 <a id="add" style="bottom: 3rem; right: 3rem; width: 15rem; display: flex; align-items:center; justify-content: center" class="btn btn-success border border-success" href="index.php?seccion=cobrarAlumno&idal='.$id.'&grade='.$grado.'&carr='.$alumno[0][5].'"><i class="fa fa-cash-register"></i> Realizar Cobro</a>
             ';
-            if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx' || $_SESSION['rol'] == 'Conta') {
+            if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx' || $_SESSION['rol'] == 'Conta' ) {
                 $deleteAl = '
                     <a id="deleteAl" style="top: 5.5rem; left: 30rem; width: 10rem; height: 3rem; display: flex; align-items:center; justify-content: center" class="btn btn-outline-danger border border-danger btn-floating" href="index.php?seccion=listaAlumnos&accion=eliminar&id=' . $alumno[0][0] . '"><span class="fa fa-trash"></span> Borrar Alumno</a>
                     <a id="deleteAl" style="top: 5.5rem; right: 30rem; width: 10rem; height: 3rem; display: flex; align-items:center; justify-content: center" class="btn btn-outline-primary border border-primary btn-floating" href="index.php?seccion=editarAlumno&id=' . $alumno[0][0] . '"><span class="fa fa-edit"></span> Editar Alumno</a>
@@ -71,19 +72,25 @@
                 </script>
             ';
         }
+        $acciones = '';
         foreach ($lista as $row => $item) {
-            $acciones = '
-                <td style="justify-content:space-around; display: flex;">
+            if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'sx') {
+                $acciones = '
+                    <a class="btn btn-icon btn-success" href="index.php?seccion=generarTicket&idpa=' . $item[0] . '"><i class="fa fa-receipt"></i></a>
+                    <a class="btn btn-icon btn-danger" href="index.php?seccion=pagosAlumno&id='.$id.'&accion=suprimir&idpa=' . $item[0] . '"><i class="fa fa-trash"></i></a>
+                ';
+            } else {
+                $acciones = '
                     <a class="btn btn-icon btn-success" href="index.php?seccion=generarTicket&id=' . $item[0] . '"><i class="fa fa-receipt"></i></a>
-                    <a class="btn btn-icon btn-danger" href="index.php?seccion=pagosAlumno&accion=eliminar&id=' . $item[0] . '"><i class="fa fa-trash"></i></a>
-                </td>';
+                ';
+            }
             $contenido = '
                     <td>' . $item[2] . '</td>
                     <td>' . $item[3] . '</td>
                     <td>' . $item[4] . '</td>
                     <td>' . $item[5] . '</td>
                     <td>' . $item[6] . '</td>
-                    ' . $acciones . '
+                    <td style="justify-content:space-around; display: flex;">' . $acciones . '</td>
             ';
             echo '
                 <tr>
