@@ -18,7 +18,6 @@
         $alumno = ControladorAlumnos::consultaAlumnoID($id);
         $nombreAl = $alumno[0][1];
         $grado = $alumno[0][4];
-        var_dump($nombreAl, $grado);
         $eliminar = new ControladorIngresos;
         $eliminar -> eliminarIngreso();
         $heads = '
@@ -87,7 +86,7 @@
             $contenido = '
                     <td>' . $item[2] . '</td>
                     <td>' . $item[3] . '</td>
-                    <td>' . $item[4] . '</td>
+                    <td><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> '.$item[4].'</span></td>
                     <td>' . $item[5] . '</td>
                     <td>' . $item[6] . '</td>
                     <td style="justify-content:space-around; display: flex;">' . $acciones . '</td>

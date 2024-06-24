@@ -4,7 +4,7 @@ use Mpdf\Mpdf;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
 // Obtener el ID del ingreso
-$idIngreso = $_GET['id'];
+$idIngreso = ($_GET['id'] ?: $_GET['idpa']);
 
 // Consultar los datos del ingreso
 $ingreso = ControladorIngresos::consultaTodoIngresoID($idIngreso);
