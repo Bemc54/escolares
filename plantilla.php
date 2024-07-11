@@ -1,11 +1,11 @@
 <html>
     <head>
-        <link rel="icon" type="image/x-icon" href="./images/logo.jpg">
+        <link rel="icon" type="image/x-icon" href="./images/logo.png">
         <title>SISTEMA UNIVERSITARIO MARIE CURIE S.C.</title>
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <!-- Personal Styles -->
-        <link rel="stylesheet" href="./styles/styles.css">
+        <link rel="stylesheet" href="./styles/styles1.css">
         <!-- Sweet Alert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Iconos -->

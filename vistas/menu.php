@@ -42,13 +42,13 @@
       <nav class="navbar fixed-top">
         '.$craerUsuarios.'
         <div class="container-fluid">
-          <a style="width: 2%"><img id="logo" src="./images/logo.jpg" alt=""></a>
+          <a style="width: 2%"><img id="logo" src="./images/logo.png" alt=""></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span style="font-size: 150%"><i class="bi bi-list" style="color: #ffffff;"></i></span>
           </button>
           <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-              <a href="index.php?seccion=inicio" style="width: 50%"><img id="logo" src="./images/logo.jpg" alt=""></a>
+              <a href="index.php?seccion=inicio" style="width: 50%"><img id="logo" src="./images/logo.png" alt=""></a>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">

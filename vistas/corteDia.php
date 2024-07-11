@@ -74,7 +74,7 @@ if ($ingreso) {
                 <h1>Corte del Día de '. $hoy .'</h1>
             </div>
             <div style="text-align: center; margin-bottom: 20px">
-                <img style="width: 25%;" src="./images/logo.jpg">
+                <img style="width: 25%;" src="./images/logo.png">
             </div>
             <table class="ticket-details">
                 <thead>
@@ -86,6 +86,7 @@ if ($ingreso) {
                         <th>Carrera</th>
                         <th>Metodo</th>
                         <th>Comentario</th>
+                        <th>Cobrador</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,10 +96,11 @@ if ($ingreso) {
         $nombre = $item[6];
         $comentario = $item[3];
         $concepto = $item[5];
-        $monto = $item[4];
+        $monto = number_format($item[4], 2);
         $grado = $item[9];
         $carrera = $item[10];
         $metodo = $item[1];
+        $cobrador = $item[2];
         $html .= '
             <tr>
                 <td>' . $nombre . '</td>
@@ -108,6 +110,7 @@ if ($ingreso) {
                 <td>' . $carrera . '</td>
                 <td>' . $metodo . '</td>
                 <td>' . $comentario . '</td>
+                <td>' . $cobrador .'</td>
             </tr>
         ';
         $totalMonto += $item[4];

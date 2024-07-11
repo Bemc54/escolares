@@ -70,7 +70,7 @@ if ($ingreso) {
                 <h1>Corte del rango ' . $fechas . '</h1>
             </div>
             <div style="text-align: center; margin-bottom: 20px">
-                <img style="width: 25%;" src="./images/logo.jpg">
+                <img style="width: 25%;" src="./images/logo.png">
             </div>
             <table class="ticket-details">
                 <thead>
@@ -82,6 +82,7 @@ if ($ingreso) {
                         <th>Carrera</th>
                         <th>Metodo</th>
                         <th>Comentario</th>
+                        <th>Cobrador</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,6 +96,7 @@ if ($ingreso) {
         $monto = number_format($item[4], 2);
         $grado = $item[9];
         $carrera = $item[10];
+        $cobrador = $item[2];
         $html .= '
             <tr>
                 <td>' . $nombre . '</td>
@@ -104,6 +106,7 @@ if ($ingreso) {
                 <td>' . $carrera . '</td>
                 <td>' . $metodo . '</td>
                 <td>' . $comentario . '</td>
+                <td>' . $cobrador . '</td>
             </tr>
         ';
         $totalMonto += $item[4];

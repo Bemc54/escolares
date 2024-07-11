@@ -80,7 +80,7 @@ if ($ingreso) {
                 <h1>Ticket de Pago</h1>
             </div>
             <div style="text-align: center; margin-bottom: 20px">
-                <img style="width: 25%;" src="./images/logo.jpg">
+                <img style="width: 25%;" src="./images/logo.png">
             </div>
             <table class="ticket-details">
                 <tr>
@@ -128,7 +128,7 @@ if ($ingreso) {
                 <img src="data:image/png;base64,' . $barcode . '" alt="Código de Barras">
             </div>
             <div class="ticket-footer">
-                <p>Gracias por su pago</p>
+                <p>Gracias por su aportacion.</p>
             </div>
         </div>
     ';

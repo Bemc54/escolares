@@ -6,7 +6,7 @@
   <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; background: #00000020;">
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="mail" requierd>
-      <label for="floatingInput">Nombre de Usuario o Correo electronico:</label>    
+      <label for="floatingInput">Nombre de Usuario:</label>    
     </div>
     <div class="input-group mb-3">
       <div class="form-floating">
