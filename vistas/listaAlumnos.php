@@ -22,6 +22,7 @@
             <th>Correo</th>
             <th>Grado de Estudio</th>
             <th>Carrera (Solo Universitarios)</th>
+            <th>Status del Alumno</th>
             <th>Fun</th>
         ';
         $btnAgregar = '';
@@ -71,12 +72,22 @@
             } else {
                 $acciones = '<td>No tienes permisos para realizar acciones</td>';
             }
+            if ($item[6] == '1') {
+                $item[6] = '<span class="badge bg-success">Activo</span>';
+            } elseif ($item[6] == '2') {
+                $item[6] = '<span class="badge bg-warning">Baja Temporal</span>';
+            } elseif ($item[6] == '3') {
+                $item[6] = '<span class="badge bg-danger">Baja Definitiva</span>';
+            } elseif ($item[6] == '4') {
+                $item[6] = '<span class="badge bg-primary">Egresado</span>';
+            } 
             $contenido = '
                     <td><a href="index.php?seccion=pagosAlumno&id='.$item[0].'">' . $item[1] . '</td>
                     <td>' . $item[2] . '</td>
                     <td>' . $item[3] . '</td>
                     <td>' . $item[4] . '</td>
                     <td>' . $item[5] . '</td>
+                    <td>' . $item[6] . '</td>
                     ' . $acciones . '
             ';
             echo '

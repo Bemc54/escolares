@@ -22,6 +22,15 @@
         $telefono = 'telefono';
         $correo = 'correo';
         $btn = 'editar';
+        if ($item[6] == '1') {
+            $item[6] = 'Activo';
+        } elseif ($item[6] == '2') {
+            $item[6] = 'Baja Temporal';
+        } elseif ($item[6] == '3') {
+            $item[6] = 'Baja Definitiva';
+        } elseif ($item[6] == '4') {
+            $item[6] = 'Egresado';
+        }
         
         echo '
             <form class="card p-4 col-5 bg-secondary" action="" method="post" enctype="multipart/form-data">
@@ -62,6 +71,16 @@
                             <option value="Proteccion Civil">Proteccion Civil</option>
                         </select>
                         <label for="floatingInput">Carreras (Solo universidad)</label>
+                    </div>
+                    <div class="form-floating mb-2 border border-danger">
+                        <select class="form-select" aria-label="Default select example" name="status">
+                            <option selected value="'.$item[6].'">Valor Actual: '.$item[6].'</option>
+                            <option value="1">Activo</option>
+                            <option value="2">Baja Temporal</option>
+                            <option value="3">Baja Definitiva</option>
+                            <option value="4">Egresado</option>
+                        </select>
+                        <label for="floatingInput">Status del Alumno</label>
                     </div>
                 </div>
                 <button class="btn btn-danger" type="submit" name="'.$btn.'"><i class="fa-regular fa-floppy-disk"></i> Guardar Cambios</button>

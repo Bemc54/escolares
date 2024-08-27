@@ -136,6 +136,10 @@ function registrarAlumno() {
                         <label for="floatingInput">Correo</label>
                     </div>
                     <div class="form-floating mb-1">
+                        <input value="1" autocomplete="off" class="form-control" type="text" id="floatingInput" name="status" required placeholder="" readonly>
+                        <label for="floatingInput">Status</label>
+                    </div>
+                    <div class="form-floating mb-1">
                         <select class="form-select" aria-label="Default select example" name="grado_estudio" required>
                             <option selected value="Bachillerato">Bachillerato</option>
                             <option value="Carrera Semi-Escolarizada">Carrera Semi-Escolarizada</option>
@@ -217,6 +221,8 @@ function cargarAlumnos() {
                         <th>Telefono</th>
                         <th>Correo</th>
                         <th>Grado de Estudio</th>
+                        <th>Carrera</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 </table>
@@ -228,7 +234,7 @@ function cargarAlumnos() {
         `,
         showCloseButton: true,
         showConfirmButton: false,
-        width: 500,
+        width: 600,
     });
 }
 function exportarTomates() {

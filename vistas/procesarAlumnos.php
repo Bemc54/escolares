@@ -26,8 +26,10 @@
                 telefono, 
                 correo,
                 grado_estudio,
-                carrera
+                carrera,
+                status
                 ) VALUES (
+                    ?,
                     ?,
                     ?,
                     ?,
@@ -37,8 +39,8 @@
             // Bucle para cada fila de datos
             foreach ($data as $row) {
                 // Asigna los parámetros de la consulta preparada
-                $stmt->bind_param("sssss",
-                    $row[0], $row[1], $row[2], $row[3], $row[4]);
+                $stmt->bind_param("ssssss",
+                    $row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
                 // Ejecuta la consulta preparada
                 $stmt->execute();
             }

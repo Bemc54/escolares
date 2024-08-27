@@ -8,7 +8,7 @@
     $sheet = $spreadsheet->getActiveSheet();
 
     // Encabezados basados en tu tabla de empleados
-    $encabezados = ['Nombre', 'Telefono', 'Correo', 'Grado de Estudio', 'Carrera'];
+    $encabezados = ['Nombre', 'Telefono', 'Correo', 'Grado de Estudio', 'Carrera', 'Status del Alumno (Tienes que poner el valor numerico que corresponden a los estatus):'];
     
     // Agrega los encabezados a la hoja de Excel
     $columna = 'A';
@@ -61,6 +61,9 @@
                 break;
             case 'Carrera':
                 $valor = 'En caso de ser un Alumno de Carrera Sabado y Domingo o Escolarizado, sino dejelo en Blanco';
+                break;
+            case 'Status del Alumno (Tienes que poner el valor numerico que corresponden a los estatus):':
+                $valor = '1: Activo | 2: Baja Temporal | 3: Baja Definitiva | 4: Egresado';
                 break;
         }
         $sheet->setCellValue($columna . $row, $valor);

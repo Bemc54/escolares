@@ -38,14 +38,16 @@
                 telefono,
                 correo,
                 grado_estudio,
-                carrera
+                carrera,
+                status
                 ) values
                 (null,
                 '$datos[nombre]',
                 '$datos[telefono]',
                 '$datos[correo]',
                 '$datos[grado_estudio]',
-                '$datos[carrera]'
+                '$datos[carrera]',
+                '$datos[status]'
             );";
             $rs = Conexion::conectar()->query($sql);
             return $rs;
@@ -57,7 +59,8 @@
                 telefono = '$datos[telefono]',
                 correo = '$datos[correo]',
                 grado_estudio = '$datos[grado_estudio]',
-                carrera = '$datos[carrera]'
+                carrera = '$datos[carrera]',
+                status = '$datos[status]'
                 WHERE id = '$id';"
             ;
             $rs = Conexion::conectar()->query($sql);
