@@ -4,11 +4,15 @@
     include 'modelo/ModeloAlumnos.php';
     include 'modelo/ModeloUsuarios.php';
     include 'modelo/ModeloIngresos.php';
+    include 'modelo/ModeloConceptos.php';
+    include 'modelo/ModeloCarreras.php';
     //controladores
     include 'controlador/ControladorPagos.php';
     include 'controlador/ControladorAlumnos.php';
     include 'controlador/ControladorUsuarios.php';
     include 'controlador/ControladorIngresos.php';
+    include 'controlador/ControladorConceptos.php';
+    include 'controlador/ControladorCarreras.php';
     include 'controlador/ControladorVistas.php';
     //plantilla
     include 'plantilla.php';

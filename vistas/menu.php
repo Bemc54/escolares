@@ -24,7 +24,76 @@
     $corteDia2 = '<li><button class="dropdown-item" onclick="corteDia()"><span class="fa fa-calendar-day"></span> Corte de Caja de días anteriores</button></li>';
     $corteRango = '<li><button class="dropdown-item" onclick="corteRango()"><span class="fa fa-calendar-days"></span> Corte de Caja de un rango de fechas</button></li>';
     if ($_SESSION['rol'] == 'sx') {
-      $craerUsuarios = '<button id="add" style="top:3.5%; bottom: 96.5%; width: 22rem; transform: translate(-50%, -50%); left: 50%;" class="btn btn-outline-dark border border-dark" onclick="crearUsuarios()"><span class="fa fa-user-plus"></span> Crear Usuario Nuevo</button>';
+      $eliminarCarrera = new ControladorCarreras();
+      $eliminarCarrera -> eliminarCarrera();
+      $carreras = ControladorCarreras::consultaCarreras();
+      $eliminarConcepto = new ControladorConceptos();
+      $eliminarConcepto -> eliminarConcepto();
+      $conceptos = ControladorConceptos::consultaConceptos();
+      $opConceptos = '';
+      $opCarreras = '';
+      foreach ($carreras as $row => $item) {
+        $opCarreras .= '
+          <td style="justify-content:space-between; display: flex;">
+            '.$item[1].'
+            <a class="btn btn-icon btn-danger" href="index.php?seccion=listaAlumnos&id='.$item[0].'&accion=Bcarrera"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        ';
+      }
+      foreach ($conceptos as $row => $item) {
+        $opConceptos .= '
+          <td style="justify-content:space-between; display: flex;">
+            '.$item[1].'
+            <a class="btn btn-icon btn-danger" href="index.php?seccion=listaPagos&id='.$item[0].'&accion=Bconcepto"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        ';
+      }
+      $craerUsuarios = '
+        <button id="add" style="top:3.5%; width: 22rem; transform: translate(-50%, -50%); left: 50%;" class="btn btn-outline-dark border border-dark" onclick="crearUsuarios()"><span class="fa fa-user-plus"></span> Crear Usuario Nuevo</button>
+        <button id="add" style="font-size: 1rem; top:3.5%; width: 10rem; height: 3rem; transform: translate(-50%, -50%); left: 13%;" class="btn btn-outline-danger border border-danger" onclick="carreras()"><span class="fa fa-trash"></span> Eliminar Carrera</button>
+        <button id="add" style="font-size: 1rem; top:3.5%; width: 10rem; height: 3rem; transform: translate(-50%, -50%); right: 13%;" class="btn btn-outline-danger border border-danger" onclick="conceptos()"><span class="fa fa-trash"></span> Eliminar Concepto de Pago</button>
+
+        <script>
+          function carreras() {
+            Swal.fire({
+              title: "Selecciona la Carrera que desees eliminar",
+              html: `
+                <form class="p-3 card bg-info" action="" method="post" enctype="multipart/form-data">
+                    <table class="table table-hover">
+                      <tbody>
+                        <tr>
+                          '.$opCarreras.'
+                        </tr>
+                      </tbody>
+                    </table>
+                </form>
+              `,
+              showCloseButton: true,
+              showConfirmButton: false,
+              width: 400,
+            })
+          }
+          function conceptos() {
+            Swal.fire({
+              title: "Selecciona el Concepto de Pago que desees eliminar",
+              html: `
+                <form class="p-3 card bg-info" action="" method="post" enctype="multipart/form-data">
+                    <table class="table table-hover">
+                      <tbody>
+                        <tr>
+                          '.$opConceptos.'
+                        </tr>
+                      </tbody>
+                    </table>
+                </form>
+              `,
+              showCloseButton: true,
+              showConfirmButton: false,
+              width: 400,
+            })
+          }
+        </script>
+      ';
       $listas = $listaAlumnos . $listaPagos . $listaIngresos . $listaAdeudos;
       $MenuDesp = $cargarAlumnos . $corteDia . $corteDia2 . $corteRango;
     } elseif ($_SESSION['rol'] == 'Conta') {

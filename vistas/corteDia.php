@@ -71,7 +71,7 @@ if ($ingreso) {
 
         <div class="ticket-container">
             <div class="ticket-header">
-                <h1>Corte del Día de '. $hoy .'</h1>
+                <h1>Corte del Día '. $hoy .'</h1>
             </div>
             <div style="text-align: center; margin-bottom: 20px">
                 <img style="width: 25%;" src="./images/logo.png">

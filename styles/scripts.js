@@ -117,124 +117,38 @@ function crearUsuarios() {
         width: 600,
     });
 }
-function registrarAlumno() {
+function addCarrera() {
     Swal.fire({
-        title: "Registrar Alumno",
+        title: "Coloque el nombre de la nueva carrera",
         html: `
-            <form class="p-3 card bg-info" action="" method="post" enctype="multipart/form-data">
-                <div style="margin-bottom:2%">
-                    <div class="form-floating mb-1">
-                        <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="nombre" required placeholder="">
-                        <label for="floatingInput">Nombre</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input autocomplete="off" class="form-control" type="number" id="floatingInput" name="telefono" required placeholder="">
-                        <label for="floatingInput">Telefono</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input autocomplete="off" class="form-control" type="mail" id="floatingInput" name="correo" required placeholder="">
-                        <label for="floatingInput">Correo</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input value="1" autocomplete="off" class="form-control" type="text" id="floatingInput" name="status" required placeholder="" readonly>
-                        <label for="floatingInput">Status</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <select class="form-select" aria-label="Default select example" name="grado_estudio" required>
-                            <option selected value="Bachillerato">Bachillerato</option>
-                            <option value="Carrera Semi-Escolarizada">Carrera Semi-Escolarizada</option>
-                            <option value="Carrera Escolarizada">Carrera Escolarizada</option>
-                            <option value="Maestria">Maestria</option>
-                            <option value="Examen Unico">Examen Unico</option>
-                        </select>
-                        <label for="floatingInput">Nivel de Estudio</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <select class="form-select" aria-label="Default select example" name="carrera">
-                            <option selected value="">Seleccione</option>
-                            <option value="Psicologia">Psicologia</option>
-                            <option value="Derecho">Derecho</option>
-                            <option value="Ingenieria Industrial">Ingenieria Industrial</option>
-                            <option value="Trabajo Social">Trabajo Social</option>
-                            <option value="Psicopedagogia">Psicopedagogia</option>
-                            <option value="Ingles">Ingles</option>
-                            <option value="Proteccion Civil">Proteccion Civil</option>
-                        </select>
-                        <label for="floatingInput">En caso de Escolarizado o Sabado y Domingo</label>
-                    </div>
+            <form class="p-3 card bg-secondary-subtle" action="" method="post" enctype="multipart/form-data">
+                <div class="form-floating mb-1">
+                    <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="carreras" required placeholder="">
+                    <label for="floatingInput">Nombre</label>
                 </div>
-                <button type="submit" name="guardar" class="btn btn-success"><i class="fa-solid fa-cloud-arrow-up"></i> Guardar Anuncio</button>
+                <button type="submit" name="carrera" class="btn btn-danger">Crear Carrera Nueva</button>
             </form>
         `,
         showCloseButton: true,
         showConfirmButton: false,
-        width: 600,
+        width: 400,
     });
 }
-function crearPago() {
+function addConcepto() {
     Swal.fire({
-        title: "Crear Pago",
+        title: "Coloque el nombre de la nueva carrera",
         html: `
-            <form class="p-3 card bg-warning-subtle" action="" method="post" enctype="multipart/form-data">
-                <div style="margin-bottom:2%">
-                    <div class="form-floating mb-1">
-                        <select class="form-select" aria-label="Default select example" name="concepto" required>
-                            <option value="Mensualidad">Mensualidad</option>
-                            <option value="Inscripcion">Inscripcion</option>
-                            <option value="Reinscripcion">Reinscripcion</option>
-                        </select>
-                        <label for="floatingInput">Concepto</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="monto" required placeholder="">
-                        <label for="floatingInput">Monto</label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <select class="form-select" aria-label="Default select example" name="tipo_alumno" required>
-                            <option selected value="Bachillerato">Bachillerato</option>
-                            <option value="Carrera Semi-Escolarizada">Carrera Semi-Escolarizada</option>
-                            <option value="Carrera Escolarizada">Carrera Escolarizada</option>
-                            <option value="Maestria">Maestria</option>
-                            <option value="Examen Unico">Examen Unico</option>
-                        </select>
-                        <label for="floatingInput">Tipo de Alumno que lo debe Pagar</label>
-                    </div>
+            <form class="p-3 card bg-secondary-subtle" action="" method="post" enctype="multipart/form-data">
+                <div class="form-floating mb-1">
+                    <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="concepto_pago" required placeholder="">
+                    <label for="floatingInput">Nombre</label>
                 </div>
-                <button type="submit" name="crear" class="btn btn-success"><i class="fa-solid fa-dollar-sign"></i> Guardar Pago</button>
+                <button type="submit" name="crearConcepto" class="btn btn-danger">Crear Concepto Nuevo</button>
             </form>
         `,
         showCloseButton: true,
         showConfirmButton: false,
-        width: 600,
-    });
-}
-function cargarAlumnos() {
-    Swal.fire({
-        title: "Carga Masiva de Alumnos",
-        html: `
-            <form class="p-3 card bg-info-subtle" action="index.php?seccion=procesarAlumnos" method="post" enctype="multipart/form-data">
-            <span class="badge bg-dark">Recuerda que tu Excel debe tener la siguiente estructura:</span>
-                <table style="margin-top:2%" class="table table-dark table-bordered">
-                <thead>
-                    <tr class="table-dark">
-                        <th>Nombre</th>
-                        <th>Telefono</th>
-                        <th>Correo</th>
-                        <th>Grado de Estudio</th>
-                        <th>Carrera</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                </table>
-                <div style="margin-bottom:2%">
-                    <input type="file" id="alumnos" name="alumnos" accept=".xlsx" class="form-control">
-                </div>
-                <button type="submit" name="cargar" class="btn btn-success"><i class="fa-solid fa-cloud-arrow-up"></i> Cargar Alumnos</button>
-            </form>
-        `,
-        showCloseButton: true,
-        showConfirmButton: false,
-        width: 600,
+        width: 400,
     });
 }
 function exportarTomates() {

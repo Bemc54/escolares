@@ -16,6 +16,13 @@
     } else{
         $eliminar = new ControladorPagos;
         $eliminar -> eliminarPago();
+        $conceptos = ControladorConceptos::consultaConceptos();
+        $crearConcepto = new ControladorConceptos;
+        $crearConcepto -> guardarConcepto();
+        $opciones = '';
+        foreach ($conceptos as $row => $item) {
+            $opciones .= '<option value="'.$item[1].'">'.$item[1].'</option>';
+        }
         $heads = '
             <th>Concepto</th>
             <th>Monto</th>
@@ -28,6 +35,45 @@
                 $lista = ControladorPagos::consultaPagos();
                 $btnAgregar = '
                     <button id="add" style="bottom: 3rem; right: 3rem;" class="btn btn-success border border-success" onclick="crearPago()"><span class="fa fa-dollar-sign"></span></button>
+                    <button id="add" style="bottom: 3rem; left: 3rem; width: 13rem; font-size: 1.3rem" class="btn btn-success border border-success" onclick="addConcepto()">Agregar Concepto de Pago</button>
+
+                    <script type="text/javascript">
+                        function crearPago() {
+                            Swal.fire({
+                                title: "Crear Pago",
+                                html: `
+                                    <form class="p-3 card bg-warning-subtle" action="" method="post" enctype="multipart/form-data">
+                                        <div style="margin-bottom:2%">
+                                            <div class="form-floating mb-1">
+                                                <select class="form-select" aria-label="Default select example" name="concepto" required>
+                                                    '.$opciones.'
+                                                </select>
+                                                <label for="floatingInput">Concepto</label>
+                                            </div>
+                                            <div class="form-floating mb-1">
+                                                <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="monto" required placeholder="">
+                                                <label for="floatingInput">Monto</label>
+                                            </div>
+                                            <div class="form-floating mb-1">
+                                                <select class="form-select" aria-label="Default select example" name="tipo_alumno" required>
+                                                    <option selected value="Bachillerato">Bachillerato</option>
+                                                    <option value="Carrera Semi-Escolarizada">Carrera Semi-Escolarizada</option>
+                                                    <option value="Carrera Escolarizada">Carrera Escolarizada</option>
+                                                    <option value="Maestria">Maestria</option>
+                                                    <option value="Examen Unico">Examen Unico</option>
+                                                </select>
+                                                <label for="floatingInput">Tipo de Alumno que lo debe Pagar</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" name="crear" class="btn btn-success"><i class="fa-solid fa-dollar-sign"></i> Guardar Pago</button>
+                                    </form>
+                                `,
+                                showCloseButton: true,
+                                showConfirmButton: false,
+                                width: 600,
+                            });
+                        }
+                    </script>
                 ';
             }
             echo '
