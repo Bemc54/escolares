@@ -88,40 +88,42 @@
             ';
         }
         foreach ($lista as $item) {
-            $grado_estudio = $item[4];
-            $ingresos_adeudados = explode(',', $item[6]);
-            $adeudos_filtrados = [];
+            if ($item[6] == '1') {
+                $grado_estudio = $item[4];
+                $ingresos_adeudados = explode(',', $item[7]);
+                $adeudos_filtrados = [];
 
-            foreach ($ingresos_adeudados as $adeudo) {
-                if ($adeudo == 'Reinscripcion') {
-                    if ($grado_estudio == 'Carrera Semi-Escolarizada' || $grado_estudio == 'Carrera Escolarizada') {
-                        if (in_array($mesInicio, $mesesReinscripcionCarrera) || in_array($mesFin, $mesesReinscripcionCarrera)) {
-                            $adeudos_filtrados[] = $adeudo;
+                foreach ($ingresos_adeudados as $adeudo) {
+                    if ($adeudo == 'Reinscripcion') {
+                        if ($grado_estudio == 'Carrera Semi-Escolarizada' || $grado_estudio == 'Carrera Escolarizada') {
+                            if (in_array($mesInicio, $mesesReinscripcionCarrera) || in_array($mesFin, $mesesReinscripcionCarrera)) {
+                                $adeudos_filtrados[] = $adeudo;
+                            }
+                        } elseif ($grado_estudio == 'Bachillerato' || $grado_estudio == 'Maestria') {
+                            if (in_array($mesInicio, $mesesReinscripcionBachillerato) || in_array($mesFin, $mesesReinscripcionBachillerato)) {
+                                $adeudos_filtrados[] = $adeudo;
+                            }
                         }
-                    } elseif ($grado_estudio == 'Bachillerato' || $grado_estudio == 'Maestria') {
-                        if (in_array($mesInicio, $mesesReinscripcionBachillerato) || in_array($mesFin, $mesesReinscripcionBachillerato)) {
-                            $adeudos_filtrados[] = $adeudo;
-                        }
+                    } else {
+                        $adeudos_filtrados[] = $adeudo;
                     }
-                } else {
-                    $adeudos_filtrados[] = $adeudo;
                 }
-            }
 
-            if (!empty($adeudos_filtrados)) {
-                $contenido = '
-                        <td><a href="index.php?seccion=pagosAlumno&id='.$item[0].'">' . $item[1] . '</td>
-                        <td>' . $item[2] . '</td>
-                        <td>' . $item[3] . '</td>
-                        <td>' . $item[4] . '</td>
-                        <td>' . $item[5] . '</td>
-                        <td>' . implode(', ', $adeudos_filtrados) . '</td>
-                ';
-                echo '
-                    <tr>
-                        '. $contenido .'
-                    </tr>
-                ';
+                if (!empty($adeudos_filtrados)) {
+                    $contenido = '
+                            <td><a href="index.php?seccion=pagosAlumno&id='.$item[0].'">' . $item[1] . '</td>
+                            <td>' . $item[2] . '</td>
+                            <td>' . $item[3] . '</td>
+                            <td>' . $item[4] . '</td>
+                            <td>' . $item[5] . '</td>
+                            <td>' . implode(', ', $adeudos_filtrados) . '</td>
+                    ';
+                    echo '
+                        <tr>
+                            '. $contenido .'
+                        </tr>
+                    ';
+                }
             }
         }
         echo '

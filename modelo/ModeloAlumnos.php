@@ -17,6 +17,7 @@
                     alumnos.correo,
                     alumnos.grado_estudio,
                     alumnos.carrera,
+                    alumnos.status,
                     GROUP_CONCAT(pagos.concepto) as ingresos_adeudados
                 FROM $tabla
                 JOIN pagos ON alumnos.grado_estudio = pagos.tipo_alumno
