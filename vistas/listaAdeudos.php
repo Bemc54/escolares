@@ -58,7 +58,7 @@
         $mesesReinscripcionBachillerato = ['enero', 'abril', 'julio', 'octubre'];
 
         if (isset($_SESSION['rol'])) {
-            $lista = ControladorAlumnos::consultaAlumnosAdeudos($inicio, $fin);
+            $lista = ControladorAlumnos::consultaAlumnosAdeudos($inicioLocal, $finLocal);
             echo '
                 <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: -1%">
                     <button class="btn btn-icon btn-outline-warning" style="background: yellow" onclick="invitadosInformacion()"><i class="fa-solid fa-question fa-flip"></i></button>
@@ -88,12 +88,18 @@
             ';
         }
         foreach ($lista as $item) {
-            if ($item[6] == '1') {
+            if ($item[6] == '1') { // Verificar el estatus
                 $grado_estudio = $item[4];
                 $ingresos_adeudados = explode(',', $item[7]);
                 $adeudos_filtrados = [];
-
+        
                 foreach ($ingresos_adeudados as $adeudo) {
+                    if ($adeudo == 'Inscripcion') {
+                        // Si el adeudo es "Inscripción", lo ignoramos
+                        continue;
+                    }
+        
+                    // Filtrado de adeudos por "Reinscripción" basado en el grado de estudio y meses
                     if ($adeudo == 'Reinscripcion') {
                         if ($grado_estudio == 'Carrera Semi-Escolarizada' || $grado_estudio == 'Carrera Escolarizada') {
                             if (in_array($mesInicio, $mesesReinscripcionCarrera) || in_array($mesFin, $mesesReinscripcionCarrera)) {
@@ -105,10 +111,12 @@
                             }
                         }
                     } else {
+                        // Agregar otros conceptos de adeudos distintos a "Reinscripción" o "Inscripción"
                         $adeudos_filtrados[] = $adeudo;
                     }
                 }
-
+        
+                // Si hay adeudos filtrados, mostrar los detalles del alumno
                 if (!empty($adeudos_filtrados)) {
                     $contenido = '
                             <td><a href="index.php?seccion=pagosAlumno&id='.$item[0].'">' . $item[1] . '</td>
@@ -125,7 +133,7 @@
                     ';
                 }
             }
-        }
+        }        
         echo '
             </tbody>
             </table>
