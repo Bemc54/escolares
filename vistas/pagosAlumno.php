@@ -25,7 +25,9 @@
             <th>Concepto</th>
             <th>Monto</th>
             <th>Fecha de Pago</th>
+            <th>Comentario</th>
             <th>Cobrador</th>
+            <th>Metodo de Pago</th>
             <th>Fun</th>
         ';
         $btnAgregar = '';
@@ -88,7 +90,9 @@
                     <td>' . $item[3] . '</td>
                     <td><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> '.$item[4].'</span></td>
                     <td>' . $item[5] . '</td>
+                    <td>' . $item[8] . '</td>
                     <td>' . $item[6] . '</td>
+                    <td>' . $item[7] . '</td>
                     <td style="justify-content:space-around; display: flex;">' . $acciones . '</td>
             ';
             echo '
