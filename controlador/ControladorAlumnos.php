@@ -14,7 +14,7 @@
             return $arreglo;
         }
 
-        static function guardarAlumno(){
+        static function registroAlumno(){
             if (isset($_POST["guardar"])) {
                 $tabla = 'alumnos';
                 $datos = array(

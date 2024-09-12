@@ -17,8 +17,6 @@
         $eliminar = new ControladorAlumnos;
         $eliminar -> eliminarAlumno();
         $carreras = ControladorCarreras::consultaCarreras();
-        $crearCarrera = new ControladorCarreras;
-        $crearCarrera -> guardarCarrera();
         $opciones = '';
         foreach ($carreras as $row => $item) {
             $opciones .= '<option value="'.$item[1].'">'.$item[1].'</option>';

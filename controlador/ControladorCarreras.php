@@ -8,7 +8,7 @@
         }
 
         static function guardarCarrera(){
-            if (isset($_POST["carrera"])) {
+            if (isset($_POST["crearCarrera"])) {
                 $tabla = 'carrera';
                 $datos = array(
                     "carreras" => $_POST["carreras"],

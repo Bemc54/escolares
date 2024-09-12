@@ -2,12 +2,14 @@
 <?php
   $login = new ControladorUsuarios;
   $login -> validarLogin();
-  $alumno = new ControladorAlumnos;
-  $alumno -> guardarAlumno();
   $Pago = new ControladorPagos;
   $Pago -> guardarPago();
   $usuario = new ControladorUsuarios;
   $usuario -> guardarUsuario();
+  $alumno = new ControladorAlumnos;
+  $alumno -> registroAlumno();
+  $crearCarrera = new ControladorCarreras;
+  $crearCarrera -> guardarCarrera();
   session_start();
   if (!isset($_SESSION['rol'])) {
     $menu = '';

@@ -31,6 +31,11 @@
         } elseif ($item[6] == '4') {
             $item[6] = 'Egresado';
         }
+        $carreras = ControladorCarreras::consultaCarreras();
+        $opciones = '';
+        foreach ($carreras as $row => $dCarrera) {
+            $opciones .= '<option value="'.$dCarrera[1].'">'.$dCarrera[1].'</option>';
+        }
         
         echo '
             <form class="card p-4 col-5 bg-secondary" action="" method="post" enctype="multipart/form-data">
@@ -62,13 +67,7 @@
                     <div class="form-floating mb-2">
                         <select class="form-select" aria-label="Default select example" name="carrera">
                             <option selected value="'.$item[5].'">Valor Actual: '.$item[5].'</option>
-                            <option value="Psicologia">Psicologia</option>
-                            <option value="Derecho">Derecho</option>
-                            <option value="Ingenieria Industrial">Ingenieria Industrial</option>
-                            <option value="Trabajo Social">Trabajo Social</option>
-                            <option value="Psicopedagogia">Psicopedagogia</option>
-                            <option value="Ingles">Ingles</option>
-                            <option value="Proteccion Civil">Proteccion Civil</option>
+                            '.$opciones.'
                         </select>
                         <label for="floatingInput">Carreras (Solo universidad)</label>
                     </div>
