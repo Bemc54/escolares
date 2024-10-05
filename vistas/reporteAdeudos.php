@@ -11,12 +11,10 @@ $fechaReal = \IntlDateFormatter::create(
     \IntlDateFormatter::GREGORIAN,
     'dd/MM/yyyy'
 );
-$inicio = $fechaReal->format(strtotime($_GET['inicio'])); 
-$fin = $fechaReal->format(strtotime($_GET['fin']));
-var_dump($inicio, $fin);
-$fechas = $inicio . ' - ' . $fin;
+var_dump($_GET['inicio'], $_GET['final']);
+$fechas = $_GET['inicio'] . ' - ' . $_GET['final'];
 // Consultar los datos del ingreso
-$ingreso = ControladorAlumnos::consultaAlumnosAdeudos($inicio, $fin);
+$ingreso = ControladorAlumnos::consultaAlumnosAdeudos($_GET['inicio'], $_GET['final']);
 
 if ($ingreso) {
     $mpdf = new Mpdf();
@@ -27,6 +25,7 @@ if ($ingreso) {
 
     // Meses relevantes para cada grado de estudio
     $mesesReinscripcionCarrera = ['septiembre', 'enero', 'abril'];
+    $mesesCarreraPsicologia = ['enero', 'julio'];
     $mesesReinscripcionBachillerato = ['enero', 'abril', 'julio', 'octubre'];
 
     // Obtener los meses de inicio y fin
@@ -94,7 +93,7 @@ if ($ingreso) {
                 <h1>Adeudos de Alumnos del Periodo ' . $fechas . '</h1>
             </div>
             <div style="text-align: center; margin-bottom: 20px">
-                <img style="width: 25%;" src="./images/logo.jpg">
+                <img style="width: 25%;" src="./images/logo.png">
             </div>
             <table class="ticket-details">
                 <thead>
@@ -111,37 +110,47 @@ if ($ingreso) {
     ';
 
     foreach ($ingreso as $row => $item) {
-        $grado_estudio = $item[4];
-        $ingresos_adeudados = explode(',', $item[6]);
-        $adeudos_filtrados = [];
+        if ($item[6] == '1') { // Verificar el estatus
+            $grado_estudio = $item[4];
+            $ingresos_adeudados = explode(',', $item[7]);
+            $adeudos_filtrados = [];
 
-        foreach ($ingresos_adeudados as $adeudo) {
-            if ($adeudo == 'Reinscripcion') {
-                if ($grado_estudio == 'Carrera Semi-Escolarizada' || $grado_estudio == 'Carrera Escolarizada' || $grado_estudio == 'maestria') {
-                    if (in_array($mesInicio, $mesesReinscripcionCarrera) || in_array($mesFin, $mesesReinscripcionCarrera)) {
-                        $adeudos_filtrados[] = $adeudo;
-                    }
-                } elseif ($grado_estudio == 'Bachillerato') {
-                    if (in_array($mesInicio, $mesesReinscripcionBachillerato) || in_array($mesFin, $mesesReinscripcionBachillerato)) {
-                        $adeudos_filtrados[] = $adeudo;
+            foreach ($ingresos_adeudados as $adeudo) {
+                if ($adeudo == 'Mensualidad') {
+                    $adeudos_filtrados[] = $adeudo;
+                }
+
+                if ($adeudo == 'Reinscripcion') {
+                    if ($grado_estudio == 'Carrera Semi-Escolarizada' || $grado_estudio == 'Carrera Escolarizada' || $grado_estudio == 'maestria') {
+                        if (in_array($mesInicio, $mesesReinscripcionCarrera) || in_array($mesFin, $mesesReinscripcionCarrera)) {
+                            $adeudos_filtrados[] = $adeudo;
+                            if ($item[5] == 'Psicologia') {
+                                $adeudos_filtrados[] = $adeudo;
+                                if (in_array($mesesCarreraPsicologia, $mesesReinscripcionCarrera)) {
+                                    $adeudos_filtrados[] = $adeudo;
+                                }
+                            }
+                        }
+                    } elseif ($grado_estudio == 'Bachillerato') {
+                        if (in_array($mesInicio, $mesesReinscripcionBachillerato) || in_array($mesFin, $mesesReinscripcionBachillerato)) {
+                            $adeudos_filtrados[] = $adeudo;
+                        }
                     }
                 }
-            } else {
-                $adeudos_filtrados[] = $adeudo;
             }
-        }
 
-        if (!empty($adeudos_filtrados)) {
-            $html .= '
-                <tr>
-                    <td>' .$item[1]. '</td>
-                    <td>' .$item[2]. '</td>
-                    <td>' .$item[3]. '</td>
-                    <td>' .$item[4]. '</td>
-                    <td>' .$item[5]. '</td>
-                    <td>' . implode(', ', $adeudos_filtrados) . '</td>
-                </tr>
-            ';
+            if (!empty($adeudos_filtrados)) {
+                $html .= '
+                    <tr>
+                        <td>' .$item[1]. '</td>
+                        <td>' .$item[2]. '</td>
+                        <td>' .$item[3]. '</td>
+                        <td>' .$item[4]. '</td>
+                        <td>' .$item[5]. '</td>
+                        <td>' . implode(', ', $adeudos_filtrados) . '</td>
+                    </tr>
+                ';
+            }
         }
     }
 
@@ -159,8 +168,8 @@ if ($ingreso) {
     ';
     $mpdf->WriteHTML($html);
     $inicio = date('d_m_Y', strtotime($_GET['inicio']));
-    $fin = date('d_m_Y', strtotime($_GET['fin']));
-    $nameFile = 'Adeudos_de_alumnos_' . $inicio . '_a_' . $fin . '.pdf';
+    $finale = date('d_m_Y', strtotime($_GET['final']));
+    $nameFile = 'Adeudos_de_alumnos_' . $inicio . '_a_' . $finale . '.pdf';
     $pdfPath = './'.$nameFile;
 
     $mpdf->Output($pdfPath, 'F');

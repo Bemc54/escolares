@@ -77,7 +77,7 @@
                                                     <label for="floatingInput">En caso de Escolarizado o Sabado y Domingo</label>
                                                 </div>
                                             </div>
-                                            <button type="submit" name="guardar" class="btn btn-success"><i class="fa-solid fa-cloud-arrow-up"></i> Guardar Anuncio</button>
+                                            <button type="submit" name="guardar" class="btn btn-success"><i class="fa-solid fa-cloud-arrow-up"></i> Guardar Alumno</button>
                                         </form>
                                     `,
                                     showCloseButton: true,

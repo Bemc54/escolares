@@ -109,7 +109,7 @@ function crearUsuarios() {
                         <label for="floatingInput">Rol</label>
                     </div>
                 </div>
-                <button type="submit" name="usuario" class="btn btn-success"><i class="fa-solid fa-cloud-arrow-up"></i> Guardar Anuncio</button>
+                <button type="submit" name="usuario" class="btn btn-success"><i class="fa-solid fa-cloud-arrow-up"></i> Guardar Usuario</button>
             </form>
         `,
         showCloseButton: true,

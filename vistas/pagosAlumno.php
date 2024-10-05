@@ -21,7 +21,7 @@
         $eliminar = new ControladorIngresos;
         $eliminar -> eliminarIngreso();
         $heads = '
-            <th>ID Pago</th>
+            <th>Folio</th>
             <th>Concepto</th>
             <th>Monto</th>
             <th>Fecha de Pago</th>
@@ -86,7 +86,7 @@
                 ';
             }
             $contenido = '
-                    <td>' . $item[2] . '</td>
+                    <td>' . $item[0] . '</td>
                     <td>' . $item[3] . '</td>
                     <td><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> '.$item[4].'</span></td>
                     <td>' . $item[5] . '</td>

@@ -23,8 +23,10 @@
                 JOIN pagos ON alumnos.grado_estudio = pagos.tipo_alumno
                 LEFT JOIN ingresos ON alumnos.id = ingresos.id_al
                     AND pagos.id = ingresos.id_pa
-                    AND STR_TO_DATE(ingresos.fecha_pago, '%d/%m/%Y') BETWEEN STR_TO_DATE('$inicio', '%d/%m/%Y') AND STR_TO_DATE('$fin', '%d/%m/%Y')
-                WHERE ingresos.id IS NULL
+                    AND ingresos.fecha_pago BETWEEN '$inicio' AND '$fin'
+                    AND (pagos.concepto = ingresos.concep) -- Verificar que los conceptos coincidan
+                WHERE ingresos.id IS NULL -- Filtrar los que no han pagado
+                AND (pagos.concepto = 'Mensualidad' OR pagos.concepto = 'Reinscripcion')
                 GROUP BY alumnos.id;
             ";
             $rs = Conexion::conectar()->query($sql);

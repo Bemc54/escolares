@@ -84,7 +84,7 @@ if ($ingreso) {
             </div>
             <table class="ticket-details">
                 <tr>
-                    <th>ID Pago</th>
+                    <th>Folio</th>
                     <td>' . $idPago . '</td>
                 </tr>
                 <tr>

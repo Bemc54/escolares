@@ -75,6 +75,7 @@ if ($ingreso) {
             <table class="ticket-details">
                 <thead>
                     <tr>
+                        <th>Folio</th>
                         <th>Alumno</th>
                         <th>Concepto</th>
                         <th>Monto</th>
@@ -89,6 +90,7 @@ if ($ingreso) {
     ';
 
     foreach ($ingreso as $row => $item) {
+        $folio = $item[0];
         $metodo = $item[1];
         $comentario = $item[3];
         $nombre = $item[6];
@@ -99,6 +101,7 @@ if ($ingreso) {
         $cobrador = $item[2];
         $html .= '
             <tr>
+                <td>' . $folio . '</td>
                 <td>' . $nombre . '</td>
                 <td>' . $concepto . '</td>
                 <td>$' . $monto . '</td>

@@ -17,7 +17,7 @@
         $eliminar = new ControladorIngresos;
         $eliminar -> eliminarIngreso();
         $heads = '
-            <th>ID Pago</th>
+            <th>Folio</th>
             <th>Alumno</th>
             <th>Grado</th>
             <th>Concepto</th>
