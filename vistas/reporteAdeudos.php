@@ -3,6 +3,23 @@ require 'vendor/autoload.php';
 use Mpdf\Mpdf;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
+// Obtener los meses de inicio y fin
+$conseguirMes = \IntlDateFormatter::create(
+    \Locale::getDefault(),
+    \IntlDateFormatter::NONE,
+    \IntlDateFormatter::NONE,
+    \date_default_timezone_get(),
+    \IntlDateFormatter::GREGORIAN,
+    'MMMM'
+);
+$fechaLocal = \IntlDateFormatter::create(
+    \Locale::getDefault(),
+    \IntlDateFormatter::NONE,
+    \IntlDateFormatter::NONE,
+    \date_default_timezone_get(),
+    \IntlDateFormatter::GREGORIAN,
+    'MM/dd/yyyy'
+);
 $fechaReal = \IntlDateFormatter::create(
     \Locale::getDefault(),
     \IntlDateFormatter::NONE,
@@ -11,10 +28,32 @@ $fechaReal = \IntlDateFormatter::create(
     \IntlDateFormatter::GREGORIAN,
     'dd/MM/yyyy'
 );
-var_dump($_GET['inicio'], $_GET['final']);
+
+// Convertir fechas de entrada a formato de timestamp con strtotime
+$inicio = strtotime(str_replace('/', '-', $_GET['inicio'])); // Asegurarse de tener el formato correcto
+$fechafinal = $_GET['final'];
+$finale = strtotime(str_replace('/', '-', $fechafinal)); // Asegurarse de tener el formato correcto
+
+// Revisar si strtotime devolvió un valor válido
+if ($inicio === false || $finale === false) {
+    echo "Error: No se pudo procesar la fecha correctamente.";
+    return;
+}
+
+// Formatear las fechas a los formatos locales
+$inicioLocal = $fechaReal->format($inicio); // Usa el timestamp generado por strtotime
+$finaleLocal = $fechaReal->format($finale); // Usa el timestamp generado por strtotime
+
+// Obtener los meses en texto
+$mesInicio = strtolower($conseguirMes->format($inicio));
+$mesFin = strtolower($conseguirMes->format($finale));
+
+// Revisar el resultado con var_dump
+var_dump($inicioLocal, $finaleLocal, $fechafinal);
 $fechas = $_GET['inicio'] . ' - ' . $_GET['final'];
+
 // Consultar los datos del ingreso
-$ingreso = ControladorAlumnos::consultaAlumnosAdeudos($_GET['inicio'], $_GET['final']);
+$ingreso = ControladorAlumnos::consultaAlumnosAdeudos($inicioLocal, $finaleLocal);
 
 if ($ingreso) {
     $mpdf = new Mpdf();
@@ -27,18 +66,6 @@ if ($ingreso) {
     $mesesReinscripcionCarrera = ['septiembre', 'enero', 'abril'];
     $mesesCarreraPsicologia = ['enero', 'julio'];
     $mesesReinscripcionBachillerato = ['enero', 'abril', 'julio', 'octubre'];
-
-    // Obtener los meses de inicio y fin
-    $conseguirMes = \IntlDateFormatter::create(
-        \Locale::getDefault(),
-        \IntlDateFormatter::NONE,
-        \IntlDateFormatter::NONE,
-        \date_default_timezone_get(),
-        \IntlDateFormatter::GREGORIAN,
-        'MMMM'
-    );
-    $mesInicio = strtolower($conseguirMes->format(strtotime($inicio)));
-    $mesFin = strtolower($conseguirMes->format(strtotime($fin)));
 
     $html = '
         <style>
@@ -167,9 +194,9 @@ if ($ingreso) {
         </div>
     ';
     $mpdf->WriteHTML($html);
-    $inicio = date('d_m_Y', strtotime($_GET['inicio']));
-    $finale = date('d_m_Y', strtotime($_GET['final']));
-    $nameFile = 'Adeudos_de_alumnos_' . $inicio . '_a_' . $finale . '.pdf';
+    $iniciom = date('d_m_Y', strtotime(str_replace('/', '-', $_GET['inicio'])));
+    $finalem = date('d_m_Y', strtotime(str_replace('/', '-', $_GET['final'])));
+    $nameFile = 'Adeudos_de_alumnos_' . $iniciom . '_a_' . $finalem . '.pdf';
     $pdfPath = './'.$nameFile;
 
     $mpdf->Output($pdfPath, 'F');
