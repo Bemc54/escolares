@@ -11,7 +11,7 @@ $ingreso = ControladorIngresos::consultaTodoIngresoID($idIngreso);
 
 if ($ingreso) {
     $idPago = $ingreso[0][2]; // Ajusta los índices según tu estructura de datos
-    $nombreAlumno = $ingreso[0][10];
+    $nombreAlumno = $ingreso[0][11];
     $concepto = $ingreso[0][3];
     $monto = $ingreso[0][4];
     $fechaPago = $ingreso[0][5];
@@ -19,8 +19,9 @@ if ($ingreso) {
     $metodo = $ingreso[0][7];
     $comentario = $ingreso[0][8];
     $idAlumno = $ingreso[0][1];
-    $grado = $ingreso[0][11];
+    $grado = $ingreso[0][12];
     $idPageIng= $idPago.$idIngreso;
+    $padoId = $ingreso[0][13];
 
     $mpdf = new Mpdf();
 
@@ -81,6 +82,9 @@ if ($ingreso) {
             </div>
             <div style="text-align: center; margin-bottom: 20px">
                 <img style="width: 25%;" src="./images/logo.png">
+            </div>
+            <div class="ticket-header">
+                <h5>IDPago: ' . $padoId . '</h5>
             </div>
             <table class="ticket-details">
                 <tr>

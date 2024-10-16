@@ -13,11 +13,13 @@
                     ingresos.cobrador, 
                     ingresos.metodo, 
                     ingresos.comentario,
+                    ingresos.fecha_representa,
                     alumnos.nombre AS alumno_nombre,
                     alumnos.telefono AS alumno_telefono,
                     alumnos.correo AS alumno_correo,
                     alumnos.grado_estudio AS alumno_grado_estudio,
                     alumnos.carrera AS alumno_carrera,
+                    alumnos.idpago,
                     pagos.concepto AS pago_concepto,
                     pagos.monto AS pago_monto,
                     pagos.tipo_alumno AS pago_tipo_alumno
@@ -44,6 +46,7 @@
                     alumnos.correo AS alumno_correo,
                     alumnos.grado_estudio AS alumno_grado_estudio,
                     alumnos.carrera AS alumno_carrera,
+                    alumnos.idpago,
                     pagos.concepto AS pago_concepto
                 FROM $tabla
                 INNER JOIN alumnos ON ingresos.id_al = alumnos.id
@@ -68,15 +71,19 @@
                     alumnos.correo AS alumno_correo,
                     alumnos.grado_estudio AS alumno_grado_estudio,
                     alumnos.carrera AS alumno_carrera,
+                    alumnos.idpago,
                     pagos.concepto AS pago_concepto
                 FROM $tabla
                 INNER JOIN alumnos ON ingresos.id_al = alumnos.id
                 INNER JOIN pagos ON ingresos.id_pa = pagos.id
-                WHERE STR_TO_DATE(ingresos.fecha_pago, '%d/%m/%Y') BETWEEN STR_TO_DATE('$desde', '%d/%m/%Y') AND STR_TO_DATE('$hasta', '%d/%m/%Y');
+                WHERE (
+                    STR_TO_DATE(ingresos.fecha_pago, '%d/%m/%Y') BETWEEN STR_TO_DATE('$desde', '%d/%m/%Y') AND STR_TO_DATE('$hasta', '%d/%m/%Y')
+                    OR STR_TO_DATE(ingresos.fecha_representa, '%d/%m/%Y') BETWEEN STR_TO_DATE('$desde', '%d/%m/%Y') AND STR_TO_DATE('$hasta', '%d/%m/%Y')
+                );
             ";
             $rs = Conexion::conectar()->query($sql);
             return $rs;
-        }
+        }        
 
         static function selectAllIngresosID($tabla, $id){
             $sql = "
@@ -85,6 +92,7 @@
                     al.id as id_al,
                     al.nombre as nombre_al,
                     al.grado_estudio as grado_al,
+                    al.idpago as idpago_al,
                     pa.id as id_pa,
                     pa.concepto as concepto_pa
                 from $tabla as ing
@@ -109,7 +117,8 @@
                 fecha_pago,
                 cobrador,
                 metodo,
-                comentario
+                comentario,
+                fecha_representa
                 ) values
                 (null,
                 '$datos[id_al]',
@@ -119,7 +128,8 @@
                 '$datos[fecha_pago]',
                 '$datos[cobrador]',
                 '$datos[metodo]',
-                '$datos[comentario]'
+                '$datos[comentario]',
+                '$datos[fecha_representa]'
             );";
             $rs = Conexion::conectar()->query($sql);
             return $rs;

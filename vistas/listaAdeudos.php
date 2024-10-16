@@ -61,9 +61,10 @@
         if (isset($_SESSION['rol'])) {
             $lista = ControladorAlumnos::consultaAlumnosAdeudos($inicioLocal, $finLocal);
             echo '
-                <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: -1%">
+                <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1%">
                     <button class="btn btn-icon btn-outline-warning" style="background: yellow" onclick="invitadosInformacion()"><i class="fa-solid fa-question fa-flip"></i></button>
-                    <a class="btn btn-danger" href="index.php?seccion=reporteAdeudos&inicio=' . $inicioLocal . '&final=' . $finLocal . '"><span class="fa fa-file-pdf"></span> Generar PDF</a>
+                    <a class="btn btn-danger" href="index.php?seccion=reporteAdeudos&inicio=' . $inicioLocal . '&final=' . $finLocal . '"><span class="bi bi-file-earmark-pdf"></span> Generar PDF</a>
+                    <a class="btn btn-success" href="index.php?seccion=exportarListas&inicio=' . $inicioLocal . '&final=' . $finLocal . '&adeudosExcel=1"><span class="bi-file-earmark-spreadsheet"></span> Generar Excel</a>
                 </div>
                 <h4 class="text-center">
                     <span class="badge bg-primary">

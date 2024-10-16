@@ -43,6 +43,10 @@
                         <input autocomplete="off" class="form-control" readonly type="text" id="floatingInput" name="fecha_pago" value="'.$fechaActual.'">
                         <label for="floatingInput">Fecha de Pago</label>
                     </div>
+                    <div class="form-floating mb-2">
+                        <input autocomplete="off" class="form-control bg-warning" type="text" id="floatingInput" name="fecha_representa" value="'.$fechaActual.'">
+                        <label for="floatingInput">Fecha que Representa el pago (Si esta pagando en el mes en curso puedes dejar la misma fecha)</label>
+                    </div>
                     <div class="form-floating mb-1">
                         <select class="form-select" aria-label="Default select example" name="metodo" required>
                             <option value="Efectivo">Efectivo</option>

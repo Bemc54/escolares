@@ -23,6 +23,7 @@
         }
         $heads = '
             <th>Nombre</th>
+            <th>IDPago</th>
             <th>Telefono</th>
             <th>Correo</th>
             <th>Grado de Estudio</th>
@@ -54,6 +55,10 @@
                                                 <div class="form-floating mb-1">
                                                     <input autocomplete="off" class="form-control" type="mail" id="floatingInput" name="correo" required placeholder="">
                                                     <label for="floatingInput">Correo</label>
+                                                </div>
+                                                <div class="form-floating mb-1">
+                                                    <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="idpago" required placeholder="">
+                                                    <label for="floatingInput">IDPago</label>
                                                 </div>
                                                 <div class="form-floating mb-1">
                                                     <input value="1" autocomplete="off" class="form-control" type="text" id="floatingInput" name="status" required placeholder="" readonly>
@@ -94,9 +99,10 @@
                 }
             }
             echo '
-                <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: -1%">
+                <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1%">
                     <button class="btn btn-icon btn-outline-warning" style="background: yellow" onclick="InfoAlumnos()"><i class="fa-solid fa-question fa-flip"></i></button>
                     <button class="btn btn-success" onclick="menuAcciones()"><span class="fa fa-bars"></span> Acciones para Alumnos</button>
+                    <a class="btn btn-success" href="index.php?seccion=exportarListas&alumnosExcel=1"><span class="bi bi-file-earmark-spreadsheet"></span> Generar Excel</a>
                 </div>
                 '.$btnAgregar.'
                 <h4 class="text-center"><span class="badge bg-primary"><i class="fa-solid fa-user-graduate"></i> Lista de Alumnos</span></h4>
@@ -143,6 +149,7 @@
             } 
             $contenido = '
                     <td><a href="index.php?seccion=pagosAlumno&id='.$item[0].'">' . $item[1] . '</td>
+                    <td>' . $item[7] . '</td>
                     <td>' . $item[2] . '</td>
                     <td>' . $item[3] . '</td>
                     <td>' . $item[4] . '</td>

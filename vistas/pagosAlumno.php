@@ -18,6 +18,7 @@
         $alumno = ControladorAlumnos::consultaAlumnoID($id);
         $nombreAl = $alumno[0][1];
         $grado = $alumno[0][4];
+        $IDPago = $alumno[0][7];
         $eliminar = new ControladorIngresos;
         $eliminar -> eliminarIngreso();
         $heads = '
@@ -25,6 +26,7 @@
             <th>Concepto</th>
             <th>Monto</th>
             <th>Fecha de Pago</th>
+            <th>Fecha que Representa</th>
             <th>Comentario</th>
             <th>Cobrador</th>
             <th>Metodo de Pago</th>
@@ -50,7 +52,7 @@
                 </div>
                 '.$btnAgregar.'
                 '.$deleteAl.'
-                <h4 class="text-center"><span class="badge bg-success"><i class="fa-solid fa-user-graduate"></i> Lista de Pagos de '.$nombreAl.'</span></h4>
+                <h4 class="text-center"><span class="badge bg-success"><i class="fa-solid fa-user-graduate"></i> Lista de Pagos de <br> '.$nombreAl.' <br><br> Pago ID: '.$IDPago.'</span></h4>
                 <table class="table table-secondary table-bordered table-striped table-hover" id="empleados">
                     <thead>
                         <tr class="table-dark">
@@ -90,6 +92,7 @@
                     <td>' . $item[3] . '</td>
                     <td><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> '.$item[4].'</span></td>
                     <td>' . $item[5] . '</td>
+                    <td>' . $item[9] . '</td>
                     <td>' . $item[8] . '</td>
                     <td>' . $item[6] . '</td>
                     <td>' . $item[7] . '</td>

@@ -22,14 +22,19 @@
         $telefono = 'telefono';
         $correo = 'correo';
         $btn = 'editar';
+        $numero = '';
         if ($item[6] == '1') {
             $item[6] = 'Activo';
+            $numero = '1';
         } elseif ($item[6] == '2') {
             $item[6] = 'Baja Temporal';
+            $numero = '2';
         } elseif ($item[6] == '3') {
             $item[6] = 'Baja Definitiva';
+            $numero = '3';
         } elseif ($item[6] == '4') {
             $item[6] = 'Egresado';
+            $numero = '4';
         }
         $carreras = ControladorCarreras::consultaCarreras();
         $opciones = '';
@@ -54,6 +59,10 @@
                         <label for="floatingInput">Correo</label>
                     </div>
                     <div class="form-floating mb-2">
+                        <input autocomplete="off" class="form-control" type="text" id="floatingInput" name="idpago" value="'.$item[7].'" required placeholder="">
+                        <label for="floatingInput">IDPago</label>
+                    </div>
+                    <div class="form-floating mb-2">
                         <select class="form-select" aria-label="Default select example" name="grado_estudio" required>
                             <option selected value="'.$item[4].'">Valor Actual: '.$item[4].'</option>
                             <option value="Bachillerato">Bachillerato</option>
@@ -73,7 +82,7 @@
                     </div>
                     <div class="form-floating mb-2 border border-danger">
                         <select class="form-select" aria-label="Default select example" name="status">
-                            <option selected value="'.$item[6].'">Valor Actual: '.$item[6].'</option>
+                            <option selected value="'.$numero   .'">Valor Actual: '.$item[6].'</option>
                             <option value="1">Activo</option>
                             <option value="2">Baja Temporal</option>
                             <option value="3">Baja Definitiva</option>

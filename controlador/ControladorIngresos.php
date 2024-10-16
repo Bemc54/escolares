@@ -19,6 +19,7 @@
                     "cobrador" => $_POST["cobrador"],
                     "metodo" => $_POST["metodo"],
                     "comentario" => $_POST["comentario"],
+                    "fecha_representa" => $_POST["fecha_representa"]
                 );
                 $respuesta = ModeloIngresos::insertarIngreso($tabla, $datos);
                 if ($respuesta > 0) {
@@ -66,7 +67,8 @@
                     "concep" => $_POST["concep"],
                     "monto_pagado" => $_POST["monto_pagado"],
                     "fecha_pago" => $_POST["fecha_pago"],
-                    "cobrador" => $_POST["cobrador"]
+                    "cobrador" => $_POST["cobrador"],
+                    "fecha_representa" => $_POST["fecha_representa"]
                 );
                 // Llama al método para editar el empleado
                 $respuesta = ModeloIngresos::editIngreso($tabla, $datos, $id);

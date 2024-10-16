@@ -23,7 +23,8 @@
                     "correo" => $_POST["correo"],
                     "grado_estudio" => $_POST["grado_estudio"],
                     "carrera" => $_POST["carrera"],
-                    "status" => $_POST["status"]
+                    "status" => $_POST["status"],
+                    "idpago" => $_POST["idpago"]
                 );
                 $respuesta = ModeloAlumnos::insertarAlumno($tabla, $datos);
                 if ($respuesta > 0) {
@@ -64,7 +65,8 @@
                     "correo" => $_POST["correo"],
                     "grado_estudio" => $_POST["grado_estudio"],
                     "carrera" => $_POST["carrera"],
-                    "status" => $_POST["status"]
+                    "status" => $_POST["status"],
+                    "idpago" => $_POST["idpago"]
                 );
                 // Llama al método para editar el empleado
                 $respuesta = ModeloAlumnos::editAlumno($tabla, $datos, $id);

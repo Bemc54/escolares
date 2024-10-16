@@ -81,6 +81,7 @@ if ($ingreso) {
                     <tr>
                         <th>Folio</th>
                         <th>Alumno</th>
+                        <th>IDPago</th>
                         <th>Concepto</th>
                         <th>Monto</th>
                         <th>Grado de Estudio</th>
@@ -103,10 +104,12 @@ if ($ingreso) {
         $carrera = $item[10];
         $metodo = $item[1];
         $cobrador = $item[2];
+        $idpago = $item[11];
         $html .= '
             <tr>
                 <td>' . $folio . '</td>
                 <td>' . $nombre . '</td>
+                <td>' . $idpago . '</td>
                 <td>' . $concepto . '</td>
                 <td>$' . $monto . '</td>
                 <td>' . $grado . '</td>

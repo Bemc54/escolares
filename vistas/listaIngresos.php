@@ -19,6 +19,7 @@
         $heads = '
             <th>Folio</th>
             <th>Alumno</th>
+            <th>IDPago</th>
             <th>Grado</th>
             <th>Concepto</th>
             <th>Monto</th>
@@ -35,6 +36,9 @@
                 <a id="add" style="width: 15rem; bottom: 3rem; right: 3rem; display: flex; align-items: center; justify-content: center" class="btn btn-success border border-success" href="index.php?seccion=corteDia"><span class="fa fa-cash-register"></span>Corte de Caja del Día</a>
             ';
             echo '
+                <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 1%">
+                    <a class="btn btn-success" href="index.php?seccion=exportarListas&ingresosExcel=1"><span class="bi bi-file-earmark-spreadsheet"></span> Generar Excel</a>
+                </div>
                 '.$btnCorte.'
                 <h4 class="text-center"><span class="badge bg-success"><i class="fa-solid fa-hand-holding-dollar"></i> Lista de Ingresos</span></h4>
                 <table class="table table-secondary table-bordered table-striped table-hover" id="empleados">
@@ -62,8 +66,9 @@
         foreach ($lista as $row => $item) {
             $contenido = '
                     <td>' . $item[0] . '</td>
-                    <td>' . $item[9] . '</td>
-                    <td>' . $item[12] . '</td>
+                    <td>' . $item[10] . '</td>
+                    <td>' . $item[15] . '</td>
+                    <td>' . $item[13] . '</td>
                     <td>' . $item[3] . '</td>
                     <td><span class="badge bg-success"><i class="fa-solid fa-dollar-sign"></i> '.$item[4].'</span></td>
                     <td>' . $item[5] . '</td>
